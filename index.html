@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wish Jar</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            padding: 40px;
+            max-width: 500px;
+            width: 100%;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+        }
+        
+        .jar {
+            width: 200px;
+            height: 250px;
+            border: 3px solid #667eea;
+            border-radius: 0 0 30px 30px;
+            background: linear-gradient(to bottom, #f0f0f0, #e0e0e0);
+            margin: 0 auto 30px;
+            position: relative;
+            overflow-y: auto;
+            padding: 15px;
+        }
+        
+        .jar::before {
+            content: '';
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 15px;
+            background: #667eea;
+            border-radius: 5px;
+        }
+        
+        .wish-item {
+            background: #fff9c4;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 8px;
+            font-size: 0.9em;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            word-wrap: break-word;
+            position: relative;
+            padding-right: 30px;
+        }
+        
+        .wish-item button {
+            position: absolute;
+            right: 5px;
+            top: 5px;
+            background: #ff6b6b;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+            font-size: 0.8em;
+        }
+        
+        .input-section {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        
+        input {
+            flex: 1;
+            padding: 12px;
+            border: 2px solid #667eea;
+            border-radius: 8px;
+            font-size: 1em;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+        
+        input:focus {
+            border-color: #764ba2;
+        }
+        
+        button {
+            padding: 12px 25px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+        
+        button:hover {
+            background: #764ba2;
+        }
+        
+        .empty-message {
+            text-align: center;
+            color: #999;
+            font-size: 0.9em;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>✨ Wish Jar ✨</h1>
+        
+        <div class="jar" id="jar">
+            <div class="empty-message">Add your first wish!</div>
+        </div>
+        
+        <div class="input-section">
+            <input 
+                type="text" 
+                id="wishInput" 
+                placeholder="Write your wish here..."
+                autocomplete="off"
+            >
+            <button onclick="addWish()">Add</button>
+        </div>
+    </div>
+    
+    <script>
+        const jar = document.getElementById('jar');
+        const wishInput = document.getElementById('wishInput');
+        const wishes = JSON.parse(localStorage.getItem('wishes')) || [];
+        
+        function renderWishes() {
+            jar.innerHTML = '';
+            if (wishes.length === 0) {
+                jar.innerHTML = '<div class="empty-message">Add your first wish!</div>';
+                return;
+            }
+            
+            wishes.forEach((wish, index) => {
+                const wishItem = document.createElement('div');
+                wishItem.className = 'wish-item';
+                wishItem.innerHTML = `
+                    ${wish}
+                    <button onclick="deleteWish(${index})">×</button>
+                `;
+                jar.appendChild(wishItem);
+            });
+        }
+        
+        function addWish() {
+            const wish = wishInput.value.trim();
+            if (wish) {
+                wishes.push(wish);
+                localStorage.setItem('wishes', JSON.stringify(wishes));
+                wishInput.value = '';
+                renderWishes();
+                wishInput.focus();
+            }
+        }
+        
+        function deleteWish(index) {
+            wishes.splice(index, 1);
+            localStorage.setItem('wishes', JSON.stringify(wishes));
+            renderWishes();
+        }
+        
+        wishInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                addWish();
+            }
+        });
+        
+        renderWishes();
+        wishInput.focus();
+    </script>
+</body>
+</html>
