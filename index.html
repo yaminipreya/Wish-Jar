@@ -2,186 +2,95 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Download Wish Jar Feature Graphic PNG</title>
-  <style>
-    body {
-      background: #0f0823;
-      color: #fff;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 30px;
-      margin: 0;
-    }
-    h1 { color: #ffccdd; margin-bottom: 5px; }
-    p { color: #a0c4ff; margin-bottom: 20px; }
-    canvas {
-      border: 2px solid rgba(255, 204, 221, 0.4);
-      border-radius: 20px;
-      box-shadow: 0 15px 40px rgba(0,0,0,0.6);
-      max-width: 90%;
-      height: auto;
-    }
-    .download-btn {
-      margin-top: 25px;
-      background: linear-gradient(135deg, #ffccdd 0%, #ffb3cc 100%);
-      color: #5a4b66;
-      font-weight: bold;
-      font-size: 18px;
-      padding: 15px 35px;
-      border: none;
-      border-radius: 30px;
-      cursor: pointer;
-      box-shadow: 0 8px 25px rgba(255, 204, 221, 0.5);
-      transition: transform 0.2s;
-    }
-    .download-btn:hover {
-      transform: scale(1.05);
-    }
-  </style>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jar of Wishes</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600;700&display=swap">
 </head>
 <body>
 
-  <h1>🎀 Kawaii "My Little Jar" Product Graphic 🎀</h1>
-  <p>Click the button below to download your complete feature graphic as a high-res PNG image.</p>
+  <div class="space-container">
+    <div class="twinkle-stars"></div>
+    <div class="nebula-glow left-glow"></div>
+    <div class="nebula-glow right-glow"></div>
 
-  <canvas id="featureCanvas" width="1200" height="900"></canvas>
+    <span class="sparkle star-1">✦</span>
+    <span class="sparkle star-2">✦</span>
+    <span class="sparkle star-3">✦</span>
+    <div class="spiral-galaxy top-left"></div>
+    <div class="spiral-galaxy top-right"></div>
 
-  <button class="download-btn" onclick="downloadPNG()">💾 Download as PNG</button>
+    <!-- MAIN SCENE CONTAINER -->
+    <div id="main-screen" class="screen active">
+      <main class="scene">
+        
+        <div class="title-group">
+          <h1 class="kawaii-text gradient-text">JAR OF<br>WISHES</h1>
+          <span class="sparkle title-sparkle">✧</span>
+        </div>
 
-  <script>
-    const canvas = document.getElementById('featureCanvas');
-    const ctx = canvas.getContext('2d');
+        <!-- Interactive Jar Element -->
+        <div class="jar-wrapper" id="jar-btn">
+          <div class="kawaii-jar">
+            <div class="jar-lid">
+              <div class="bow">🎀</div>
+            </div>
+            <div class="jar-body">
+              <div class="jar-face">● ‿ ●</div>
+              <div class="star-fill">
+                <span class="mini-star s1">⭐</span>
+                <span class="mini-star s2">🌟</span>
+                <span class="mini-star s3">⭐</span>
+                <span class="mini-star s4">🌟</span>
+                <span class="mini-star s5">⭐</span>
+              </div>
+            </div>
+          </div>
+        </div>
 
-    // 1. COSMIC BACKGROUND
-    const bgGlow = ctx.createRadialGradient(600, 450, 0, 600, 450, 675);
-    bgGlow.addColorStop(0, '#2d1f4e');
-    bgGlow.addColorStop(0.5, '#180e33');
-    bgGlow.addColorStop(1, '#0b0518');
-    ctx.fillStyle = bgGlow;
-    ctx.fillRect(0, 0, 1200, 900);
+        <div class="action-group">
+          <div class="star-character">
+            <div class="star-shape">★</div>
+            <div class="star-face">◕ ‿ ◕</div>
+          </div>
+          <h2 class="kawaii-text sub-text">TAP TO WRITE<br>YOUR WISH</h2>
+        </div>
 
-    // Stars
-    ctx.fillStyle = '#ffffff';
-    const stars = [[150,120],[280,80],[420,190],[750,100],[920,150],[1080,90],[100,450],[1120,480],[180,780],[1020,790]];
-    stars.forEach(([x, y]) => {
-      ctx.beginPath();
-      ctx.arc(x, y, 2, 0, Math.PI * 2);
-      ctx.fill();
-    });
+      </main>
+    </div>
 
-    // 2. HEADER TEXT
-    ctx.textAlign = 'center';
-    ctx.font = 'bold 32px "Segoe UI", sans-serif';
-    ctx.fillStyle = '#ffccdd';
-    ctx.fillText('🎀 MY LITTLE JAR 🎀', 600, 70);
+    <!-- WISH NOTE POPUP SCREEN -->
+    <div id="note-screen" class="screen hidden">
+      <div class="note-card">
+        <div class="tape"></div>
+        <div class="note-header">
+          <span class="star-deco">★</span>
+          <span class="close-btn" id="close-note">×</span>
+        </div>
+        <div class="note-content">
+          <p id="wish-text">"i have a great day"</p>
+          <span id="wish-date">August 30, 2026</span>
+        </div>
+        <div class="note-actions">
+          <button id="tuck-btn">tuck it back</button>
+          <button id="unfold-btn">unfold another</button>
+        </div>
+      </div>
+    </div>
 
-    ctx.font = '16px "Segoe UI", sans-serif';
-    ctx.fillStyle = '#a0c4ff';
-    ctx.fillText('Feature Ecosystem & Interactive Memory Showcase', 600, 100);
+    <!-- Foreground Hills & Flowers -->
+    <div class="foreground-landscape">
+      <div class="hill left-hill">
+        <span class="flower f1">🌸</span>
+        <span class="flower f2">🌼</span>
+      </div>
+      <div class="hill right-hill">
+        <span class="flower f3">🌺</span>
+        <span class="flower f4">🌸</span>
+      </div>
+    </div>
+  </div>
 
-    // 3. CENTRAL JAR GLASS BODY
-    ctx.save();
-    ctx.translate(480, 240);
-
-    // Glass Fill
-    const glassGrad = ctx.createLinearGradient(0, 0, 240, 450);
-    glassGrad.addColorStop(0, 'rgba(255, 255, 255, 0.4)');
-    glassGrad.addColorStop(0.3, 'rgba(160, 196, 255, 0.2)');
-    glassGrad.addColorStop(0.7, 'rgba(255, 204, 221, 0.2)');
-    glassGrad.addColorStop(1, 'rgba(255, 255, 255, 0.4)');
-
-    ctx.fillStyle = glassGrad;
-    ctx.strokeStyle = 'rgba(255, 255, 255, 0.8)';
-    ctx.lineWidth = 4;
-    ctx.beginPath();
-    ctx.moveTo(60, 40);
-    ctx.lineTo(180, 40);
-    ctx.quadraticCurveTo(210, 50, 210, 80);
-    ctx.lineTo(220, 410);
-    ctx.quadraticCurveTo(220, 450, 170, 450);
-    ctx.lineTo(70, 450);
-    ctx.quadraticCurveTo(20, 450, 20, 410);
-    ctx.lineTo(30, 80);
-    ctx.quadraticCurveTo(30, 50, 60, 40);
-    ctx.closePath();
-    ctx.fill();
-    ctx.stroke();
-
-    // Kawaii Face on Jar
-    ctx.fillStyle = '#5a4b66';
-    ctx.beginPath(); ctx.arc(90, 240, 5, 0, Math.PI * 2); ctx.fill();
-    ctx.beginPath(); ctx.arc(150, 240, 5, 0, Math.PI * 2); ctx.fill();
-    ctx.beginPath();
-    ctx.arc(120, 246, 6, 0, Math.PI);
-    ctx.stroke();
-
-    // Lid & Gingham Ribbon
-    ctx.fillStyle = '#ffb3cc';
-    ctx.fillRect(30, 30, 180, 35);
-    ctx.fillStyle = '#ff6699';
-    ctx.beginPath(); ctx.arc(185, 47, 12, 0, Math.PI * 2); ctx.fill();
-
-    ctx.restore();
-
-    // Helper for Cards
-    function drawCard(x, y, w, h, title, lines, titleColor = '#ffee88', strokeColor = 'rgba(255,204,221,0.4)') {
-      ctx.save();
-      ctx.translate(x, y);
-      ctx.fillStyle = 'rgba(255, 255, 255, 0.12)';
-      ctx.strokeStyle = strokeColor;
-      ctx.lineWidth = 1.5;
-      ctx.beginPath();
-      ctx.roundRect(0, 0, w, h, 18);
-      ctx.fill();
-      ctx.stroke();
-
-      ctx.textAlign = 'left';
-      ctx.font = 'bold 15px "Segoe UI", sans-serif';
-      ctx.fillStyle = titleColor;
-      ctx.fillText(title, 20, 32);
-
-      ctx.font = '12px "Segoe UI", sans-serif';
-      ctx.fillStyle = '#ffffff';
-      lines.forEach((line, index) => {
-        ctx.fillText(line, 20, 55 + (index * 18));
-      });
-      ctx.restore();
-    }
-
-    // DRAW ALL DIFFERENTIATOR CARDS
-    drawCard(80, 140, 320, 95, '🐰 Kawaii Mascot Guide', ['Interactive bunny helper offering', 'sweet tips & memory prompts.'], '#ffee88');
-    drawCard(60, 260, 340, 190, '🩷 Vintage Note & 📷 Photos', ['• Vintage-pink memory paper layout', '• Automatic 📅 Aug 31, 2026 timestamps', '• Photo thumbnail uploads inside stars', '• 250 character limit for tidy notes'], '#ffccdd', '#ffccdd');
-    drawCard(80, 470, 320, 100, '⭐ Fold / Unfold Animation', ['Signature 4-step origami sequence:', 'Watch paper physically morph into a star', 'and fly directly into your jar.'], '#ffee88');
-    drawCard(80, 590, 320, 90, '💫 Random "Open a Memory"', ['Shake or tap your jar to pop open a', 'random happy moment from your past.'], '#ffee88');
-
-    drawCard(800, 140, 320, 100, '🫙 Custom Personal Jars', ['Create distinct thematic jars:', '💖 Gratitude  •  🚀 Dreams  •  ✨ 2026 Goals'], '#a0c4ff');
-    drawCard(800, 260, 320, 110, '💌 Shareable Jar Links', ['Send your unique URL to friends to view', 'your public memory collection:', 'yaminipreya.github.io/Wish-Jar/'], '#ffccdd');
-    drawCard(800, 390, 320, 110, '👥 Collaborative Shared Jars', ['Invite besties, partners, or team members', 'to drop secret stars into a single jar!'], '#cbb4d5');
-    drawCard(800, 520, 320, 95, '🔐 Cloud Account & Sync', ['Sign in with email to back up your stars', 'permanently. Never lose a memory!'], '#b5ead7');
-
-    // Bottom CTA Button
-    ctx.save();
-    ctx.translate(450, 780);
-    ctx.fillStyle = '#ffccdd';
-    ctx.beginPath();
-    ctx.roundRect(0, 0, 300, 54, 27);
-    ctx.fill();
-    ctx.font = 'bold 16px "Segoe UI", sans-serif';
-    ctx.fillStyle = '#5a4b66';
-    ctx.textAlign = 'center';
-    ctx.fillText('✨ START YOUR JAR NOW ✨', 150, 33);
-    ctx.restore();
-
-    // PNG Download Function
-    function downloadPNG() {
-      const image = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
-      const link = document.createElement('a');
-      link.download = 'kawaii-wish-jar-product-features.png';
-      link.href = image;
-      link.click();
-    }
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>
