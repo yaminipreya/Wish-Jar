@@ -1,0 +1,84 @@
+* {
+  box-sizing: border-box;
+  font-family: 'Special Elite', cursive, typewriter;
+}
+
+body {
+  margin: 0;
+  background-color: #f7f3ec;
+  color: #3e3835;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.center-content {
+  text-align: center;
+  cursor: pointer;
+}
+
+.jar-wrapper {
+  position: relative;
+  display: inline-block;
+  transition: transform 0.3s ease;
+}
+
+.jar-wrapper:hover {
+  transform: scale(1.02);
+}
+
+.jar-image {
+  width: 260px;
+  height: auto;
+}
+
+/* Modal Popup Overlay */
+.modal {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0, 0, 0, 0.15);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  backdrop-filter: blur(2px);
+  transition: opacity 0.4s ease;
+}
+
+.hidden {
+  display: none;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.paper-note {
+  background: #eef2f5;
+  padding: 30px 40px;
+  border-radius: 4px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  text-align: center;
+  position: relative;
+  max-width: 320px;
+  width: 90%;
+  animation: unfold 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes unfold {
+  from { transform: scale(0.6) rotate(-4deg); opacity: 0; }
+  to { transform: scale(1) rotate(0deg); opacity: 1; }
+}
+
+.paper-btn {
+  background: none;
+  border: 1px solid #b0b5b9;
+  padding: 8px 14px;
+  font-size: 0.85rem;
+  margin: 10px 5px 0;
+  cursor: pointer;
+  color: #555;
+}
+
+.paper-btn:hover {
+  background: #e2e7ec;
+}
