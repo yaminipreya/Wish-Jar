@@ -1,203 +1,241 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wish Jar</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: 'Arial', sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-        }
-        
-        .container {
-            background: white;
-            border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            padding: 40px;
-            max-width: 500px;
-            width: 100%;
-        }
-        
-        h1 {
-            text-align: center;
-            color: #333;
-            margin-bottom: 30px;
-            font-size: 2.5em;
-        }
-        
-        .jar {
-            width: 200px;
-            height: 250px;
-            border: 3px solid #667eea;
-            border-radius: 0 0 30px 30px;
-            background: linear-gradient(to bottom, #f0f0f0, #e0e0e0);
-            margin: 0 auto 30px;
-            position: relative;
-            overflow-y: auto;
-            padding: 15px;
-        }
-        
-        .jar::before {
-            content: '';
-            position: absolute;
-            top: -15px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 120px;
-            height: 15px;
-            background: #667eea;
-            border-radius: 5px;
-        }
-        
-        .wish-item {
-            background: #fff9c4;
-            padding: 10px;
-            margin-bottom: 10px;
-            border-radius: 8px;
-            font-size: 0.9em;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            word-wrap: break-word;
-            position: relative;
-            padding-right: 30px;
-        }
-        
-        .wish-item button {
-            position: absolute;
-            right: 5px;
-            top: 5px;
-            background: #ff6b6b;
-            color: white;
-            border: none;
-            border-radius: 50%;
-            width: 20px;
-            height: 20px;
-            cursor: pointer;
-            font-size: 0.8em;
-        }
-        
-        .input-section {
-            display: flex;
-            gap: 10px;
-            margin-top: 20px;
-        }
-        
-        input {
-            flex: 1;
-            padding: 12px;
-            border: 2px solid #667eea;
-            border-radius: 8px;
-            font-size: 1em;
-            outline: none;
-            transition: border-color 0.3s;
-        }
-        
-        input:focus {
-            border-color: #764ba2;
-        }
-        
-        button {
-            padding: 12px 25px;
-            background: #667eea;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 1em;
-            font-weight: bold;
-            transition: background 0.3s;
-        }
-        
-        button:hover {
-            background: #764ba2;
-        }
-        
-        .empty-message {
-            text-align: center;
-            color: #999;
-            font-size: 0.9em;
-            padding: 20px;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Jar of Wishes - Cosmic Kawaii Memory Keeper</title>
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-    <div class="container">
-        <h1>✨ Wish Jar ✨</h1>
-        
-        <div class="jar" id="jar">
-            <div class="empty-message">Add your first wish!</div>
+
+  <!-- Cosmic Background Layers -->
+  <div class="nebula"></div>
+  <div class="stars-bg"></div>
+
+  <!-- Mobile App Frame Container -->
+  <div class="app-card">
+
+    <!-- ==================================================================== -->
+    <!-- SCREEN 1: LANDING PAGE                                               -->
+    <!-- ==================================================================== -->
+    <section id="screen-1" class="screen active">
+      <div style="font-size: 28px; margin-top: 20px;">✨</div>
+      <h1 style="color: var(--pastel-pink); font-size: 26px; margin: 10px 0;">🎀 My Little Jar 🎀</h1>
+      <p style="color: var(--pastel-purple); font-size: 14px; width: 80%;">A tiny place for your wishes, dreams & happy moments ♡</p>
+
+      <div class="jar-wrapper">
+        <div class="jar-lid"></div>
+        <div class="jar-bow">🎀</div>
+        <div class="jar-body">
+          <div class="mini-star">⭐</div>
+          <div class="mini-star">✨</div>
+          <div class="mini-star">💫</div>
         </div>
-        
-        <div class="input-section">
-            <input 
-                type="text" 
-                id="wishInput" 
-                placeholder="Write your wish here..."
-                autocomplete="off"
-            >
-            <button onclick="addWish()">Add</button>
+        <div class="jar-face">◕ ‿ ◕</div>
+      </div>
+
+      <p style="font-style: italic; color: var(--pastel-yellow); font-size: 13px; margin-bottom: 20px;">“Keep a little happiness here.”</p>
+
+      <button class="btn-primary" onclick="navigateTo('screen-2')">✨ Create My Jar</button>
+      <button class="btn-secondary" onclick="alert('Write your wish on paper, fold it into a star, and seal it inside your digital jar forever!')">♡ How it works</button>
+    </section>
+
+    <!-- ==================================================================== -->
+    <!-- SCREEN 2: CREATE YOUR JAR                                           -->
+    <!-- ==================================================================== -->
+    <section id="screen-2" class="screen">
+      <div class="top-nav">
+        <button class="back-btn" onclick="navigateTo('screen-1')">←</button>
+        <div>✨</div>
+      </div>
+      
+      <h2 style="color: var(--pastel-pink); font-size: 22px; margin-bottom: 20px;">🎀 Create Your Jar</h2>
+
+      <label for="jarNameInput">What shall we call it?</label>
+      <input type="text" id="jarNameInput" class="input-field" value="My Happy Little Jar ♡" />
+
+      <label for="userNameInput">Your name</label>
+      <input type="text" id="userNameInput" class="input-field" value="Yamini" />
+
+      <div style="margin: 30px 0 10px 0; font-size: 40px;">🐰</div>
+      <p style="color: var(--pastel-yellow); font-size: 14px; margin-bottom: 20px;">“Let's make some stars!”</p>
+
+      <button class="btn-primary" onclick="setupJar()">✨ Start My Jar</button>
+    </section>
+
+    <!-- ==================================================================== -->
+    <!-- SCREEN 3: MAIN JAR EXPERIENCE (HERO)                                 -->
+    <!-- ==================================================================== -->
+    <section id="screen-3" class="screen">
+      <div class="top-nav">
+        <div id="displayJarTitle" style="color: var(--pastel-pink); font-weight: bold; font-size: 16px;">🎀 My Happy Little Jar</div>
+        <button class="icon-btn" onclick="navigateTo('screen-2')">⚙️</button>
+      </div>
+
+      <p id="displayGreeting" style="color: var(--pastel-purple); font-size: 14px;">Hi Yamini ♡</p>
+
+      <div class="jar-wrapper">
+        <div class="jar-lid"></div>
+        <div class="jar-bow">🎀</div>
+        <div id="mainJarContents" class="jar-body">
+          <!-- Dynamically Populated Mini Stars -->
         </div>
-    </div>
-    
-    <script>
-        const jar = document.getElementById('jar');
-        const wishInput = document.getElementById('wishInput');
-        const wishes = JSON.parse(localStorage.getItem('wishes')) || [];
+        <div class="jar-face">◕ ‿ ◕</div>
+      </div>
+
+      <p id="starCountLabel" style="color: var(--pastel-yellow); font-weight: bold; margin-bottom: 15px;">0 little stars</p>
+
+      <button class="btn-primary" onclick="navigateTo('screen-4')">⭐ Add a Star</button>
+      <button class="btn-secondary">💌 Share this Jar</button>
+      <button class="btn-secondary">🔐 Save My Stars</button>
+
+      <div style="margin-top: 15px; font-size: 24px;">🐰</div>
+      <p style="color: var(--pastel-pink); font-size: 12px;">“Tap the jar for a memory!”</p>
+    </section>
+
+    <!-- ==================================================================== -->
+    <!-- SCREEN 4: ADD A STAR (NOTE INPUT)                                   -->
+    <!-- ==================================================================== -->
+    <section id="screen-4" class="screen">
+      <div class="top-nav">
+        <button class="back-btn" onclick="navigateTo('screen-3')">← Add a Star</button>
+      </div>
+
+      <div class="hero-star" style="font-size: 40px;">⭐</div>
+
+      <div class="paper-card">
+        <p style="font-weight: bold; color: var(--pastel-pink-dark);">A little note ♡</p>
+        <textarea id="noteTextInput" placeholder="Dear future me... Today I am grateful for..."></textarea>
         
-        function renderWishes() {
-            jar.innerHTML = '';
-            if (wishes.length === 0) {
-                jar.innerHTML = '<div class="empty-message">Add your first wish!</div>';
-                return;
-            }
-            
-            wishes.forEach((wish, index) => {
-                const wishItem = document.createElement('div');
-                wishItem.className = 'wish-item';
-                wishItem.innerHTML = `
-                    ${wish}
-                    <button onclick="deleteWish(${index})">×</button>
-                `;
-                jar.appendChild(wishItem);
-            });
-        }
-        
-        function addWish() {
-            const wish = wishInput.value.trim();
-            if (wish) {
-                wishes.push(wish);
-                localStorage.setItem('wishes', JSON.stringify(wishes));
-                wishInput.value = '';
-                renderWishes();
-                wishInput.focus();
-            }
-        }
-        
-        function deleteWish(index) {
-            wishes.splice(index, 1);
-            localStorage.setItem('wishes', JSON.stringify(wishes));
-            renderWishes();
-        }
-        
-        wishInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') {
-                addWish();
-            }
-        });
-        
-        renderWishes();
-        wishInput.focus();
-    </script>
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 10px;">
+          <label class="file-label">
+            📷 Add photo
+            <input type="file" style="display: none;" onchange="alert('Photo attached!')" />
+          </label>
+          <span style="font-size: 12px; color: #888;" id="dateDisplay">Aug 31, 2026</span>
+        </div>
+      </div>
+
+      <button class="btn-primary" onclick="startFoldingSequence()">🎀 Fold My Note</button>
+    </section>
+
+    <!-- ==================================================================== -->
+    <!-- SCREEN 5: FOLDING ANIMATION                                          -->
+    <!-- ==================================================================== -->
+    <section id="screen-5" class="screen">
+      <h3 style="color: var(--pastel-pink); margin-top: 20px;">Folding Your Wish...</h3>
+
+      <div class="fold-stage">
+        <div id="paperFoldingObject" class="fold-object">
+          <span id="foldText">My little memory ♡</span>
+        </div>
+        <div id="magicStar" class="star-spawn">⭐</div>
+      </div>
+    </section>
+
+    <!-- ==================================================================== -->
+    <!-- SCREEN 6: STAR ADDED SUCCESS                                         -->
+    <!-- ==================================================================== -->
+    <section id="screen-6" class="screen">
+      <div style="font-size: 30px; margin-top: 20px;">✨</div>
+      <div class="hero-star" style="font-size: 50px; margin: 10px 0;">⭐</div>
+
+      <h2 style="color: var(--pastel-yellow);">Your star is safe!</h2>
+      <p style="color: var(--pastel-pink); font-style: italic; font-size: 14px; margin-bottom: 20px;">“A little memory saved ♡”</p>
+
+      <div class="jar-wrapper" style="height: 160px; transform: scale(0.9);">
+        <div class="jar-lid"></div>
+        <div class="jar-body" id="successJarContents"></div>
+        <div class="jar-face">◕ ‿ ◕</div>
+      </div>
+
+      <button class="btn-primary" onclick="navigateTo('screen-3')">💌 Share My Jar</button>
+      <button class="btn-secondary" onclick="navigateTo('screen-4')">Add another ⭐</button>
+    </section>
+
+  </div>
+
+  <!-- JavaScript App Logic -->
+  <script>
+    let totalStars = 3;
+
+    function navigateTo(screenId) {
+      document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+      document.getElementById(screenId).classList.add('active');
+    }
+
+    function setupJar() {
+      const jarName = document.getElementById('jarNameInput').value;
+      const userName = document.getElementById('userNameInput').value;
+
+      document.getElementById('displayJarTitle').innerText = '🎀 ' + (jarName || 'My Jar');
+      document.getElementById('displayGreeting').innerText = 'Hi ' + (userName || 'Friend') + ' ♡';
+
+      renderJarStars();
+      navigateTo('screen-3');
+    }
+
+    function renderJarStars() {
+      const container = document.getElementById('mainJarContents');
+      const successContainer = document.getElementById('successJarContents');
+      container.innerHTML = '';
+      successContainer.innerHTML = '';
+
+      const starIcons = ['⭐', '✨', '💫', '💕'];
+      for (let i = 0; i < totalStars; i++) {
+        const starEl = document.createElement('div');
+        starEl.className = 'mini-star';
+        starEl.innerText = starIcons[i % starIcons.length];
+        container.appendChild(starEl);
+
+        const clone = starEl.cloneNode(true);
+        successContainer.appendChild(clone);
+      }
+
+      document.getElementById('starCountLabel').innerText = totalStars + ' little stars';
+    }
+
+    function startFoldingSequence() {
+      const noteText = document.getElementById('noteTextInput').value;
+      if (!noteText.trim()) {
+        alert("Please write a small wish or memory first! ♡");
+        return;
+      }
+
+      navigateTo('screen-5');
+
+      const paper = document.getElementById('paperFoldingObject');
+      const foldText = document.getElementById('foldText');
+      const star = document.getElementById('magicStar');
+
+      paper.className = 'fold-object';
+      paper.style.opacity = '1';
+      star.className = 'star-spawn';
+      foldText.innerText = "My little memory ♡";
+
+      setTimeout(() => {
+        paper.classList.add('step-2');
+        foldText.innerText = "♡ note";
+      }, 1000);
+
+      setTimeout(() => {
+        paper.classList.add('step-3');
+        star.classList.add('visible');
+      }, 2000);
+
+      setTimeout(() => {
+        star.classList.add('fly-to-jar');
+      }, 3000);
+
+      setTimeout(() => {
+        totalStars++;
+        renderJarStars();
+        document.getElementById('noteTextInput').value = '';
+        navigateTo('screen-6');
+      }, 3800);
+    }
+
+    renderJarStars();
+  </script>
 </body>
 </html>
