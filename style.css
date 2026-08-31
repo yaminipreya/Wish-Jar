@@ -1,84 +1,370 @@
+/* ==========================================================================
+   1. GLOBAL STYLES & COSMIC BACKDROP
+   ========================================================================== */
+:root {
+  --pastel-pink: #ffccdd;
+  --pastel-pink-dark: #ffb3cc;
+  --pastel-yellow: #ffee88;
+  --pastel-purple: #cbb4d5;
+  --pastel-blue: #a0c4ff;
+  --paper-bg: #fffbf0;
+  --text-color: #5a4b66;
+}
+
 * {
   box-sizing: border-box;
-  font-family: 'Special Elite', cursive, typewriter;
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 body {
-  margin: 0;
-  background-color: #f7f3ec;
-  color: #3e3835;
+  min-height: 100vh;
+  background: radial-gradient(ellipse at bottom, #2a1b4e 0%, #110926 70%, #080314 100%);
+  color: #ffffff;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* Cosmic Background Nebulae & Twinkles */
+.nebula {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    radial-gradient(circle at 20% 20%, rgba(203, 180, 213, 0.25) 0%, transparent 40%),
+    radial-gradient(circle at 80% 30%, rgba(160, 196, 255, 0.25) 0%, transparent 40%),
+    radial-gradient(circle at 50% 80%, rgba(255, 204, 221, 0.2) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.stars-bg {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    radial-gradient(white, rgba(255,255,255,.2) 2px, transparent 10px),
+    radial-gradient(white, rgba(255,255,255,.15) 1px, transparent 5px);
+  background-size: 450px 450px, 250px 250px;
+  opacity: 0.6;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Container Card / Mobile Frame */
+.app-card {
+  position: relative;
+  width: 420px;
+  min-height: 720px;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 36px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 0 40px rgba(203, 180, 213, 0.3);
+  padding: 30px 24px;
+  z-index: 10;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }
 
-.center-content {
+/* Screen View Management */
+.screen {
+  display: none;
+  flex-direction: column;
+  align-items: center;
   text-align: center;
-  cursor: pointer;
+  height: 100%;
+  width: 100%;
+  animation: fadeIn 0.4s ease-out forwards;
 }
 
+.screen.active {
+  display: flex;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Header & Navigation */
+.top-nav {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.back-btn, .icon-btn {
+  background: none;
+  border: none;
+  color: var(--pastel-pink);
+  font-size: 22px;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.back-btn:hover, .icon-btn:hover {
+  transform: scale(1.15);
+}
+
+/* Standardized Buttons */
+.btn-primary {
+  background: linear-gradient(135deg, var(--pastel-pink) 0%, var(--pastel-pink-dark) 100%);
+  color: var(--text-color);
+  font-weight: 700;
+  font-size: 16px;
+  padding: 14px 28px;
+  border: none;
+  border-radius: 24px;
+  cursor: pointer;
+  box-shadow: 0 6px 20px rgba(255, 204, 221, 0.4);
+  transition: all 0.25s ease;
+  width: 85%;
+  margin: 10px 0;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 8px 25px rgba(255, 204, 221, 0.6);
+}
+
+.btn-secondary {
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+  font-size: 14px;
+  padding: 10px 20px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 20px;
+  cursor: pointer;
+  margin: 6px 0;
+  width: 75%;
+  transition: background 0.2s;
+}
+
+.btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+/* Input Fields */
+.input-field {
+  width: 85%;
+  padding: 14px;
+  border-radius: 18px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  outline: none;
+  font-size: 15px;
+  margin: 8px 0 16px 0;
+}
+
+.input-field::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+label {
+  font-size: 13px;
+  color: var(--pastel-pink);
+  align-self: flex-start;
+  margin-left: 8%;
+}
+
+/* ==========================================================================
+   2. KAWAII JAR COMPONENT
+   ========================================================================== */
 .jar-wrapper {
   position: relative;
-  display: inline-block;
-  transition: transform 0.3s ease;
+  width: 180px;
+  height: 220px;
+  margin: 20px 0;
 }
 
-.jar-wrapper:hover {
-  transform: scale(1.02);
+.jar-lid {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120px;
+  height: 32px;
+  background: repeating-linear-gradient(45deg, #ffb3cc, #ffb3cc 10px, #ffffff 10px, #ffffff 20px);
+  border-radius: 12px 12px 4px 4px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  border: 2px solid #fff;
+  z-index: 3;
 }
 
-.jar-image {
-  width: 260px;
-  height: auto;
+.jar-bow {
+  position: absolute;
+  top: 24px;
+  right: 20px;
+  font-size: 22px;
+  z-index: 4;
 }
 
-/* Modal Popup Overlay */
-.modal {
-  position: fixed;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background: rgba(0, 0, 0, 0.15);
+.jar-body {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 160px;
+  height: 180px;
+  background: linear-gradient(135deg, rgba(255,255,255,0.35) 0%, rgba(255,255,255,0.1) 100%);
+  border: 3px solid rgba(255, 255, 255, 0.8);
+  border-radius: 30px 30px 40px 40px;
+  box-shadow: inset 0 0 25px rgba(255, 255, 255, 0.5), 0 10px 30px rgba(0,0,0,0.3);
+  overflow: hidden;
+  display: flex;
+  flex-wrap: wrap-reverse;
+  align-content: flex-start;
+  justify-content: center;
+  padding: 15px 10px;
+  gap: 6px;
+  z-index: 2;
+}
+
+.jar-face {
+  position: absolute;
+  top: 35%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 18px;
+  letter-spacing: 12px;
+  opacity: 0.8;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.mini-star {
+  font-size: 20px;
+  filter: drop-shadow(0 0 6px var(--pastel-yellow));
+  animation: gentleWiggle 3s infinite ease-in-out;
+}
+
+@keyframes gentleWiggle {
+  0%, 100% { transform: rotate(0deg); }
+  50% { transform: rotate(12deg); }
+}
+
+.hero-star {
+  font-size: 64px;
+  filter: drop-shadow(0 0 20px var(--pastel-yellow));
+  animation: float 3s ease-in-out infinite;
+  margin-bottom: 10px;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+
+/* ==========================================================================
+   3. VINTAGE PINK PAPER CARD
+   ========================================================================== */
+.paper-card {
+  background-color: var(--paper-bg);
+  color: var(--text-color);
+  width: 100%;
+  border-radius: 20px;
+  padding: 20px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+  border: 4px solid var(--pastel-pink);
+  text-align: left;
+  margin: 15px 0;
+}
+
+.paper-card textarea {
+  width: 100%;
+  height: 120px;
+  background: transparent;
+  border: none;
+  border-bottom: 2px dashed var(--pastel-pink-dark);
+  outline: none;
+  resize: none;
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--text-color);
+  margin-top: 10px;
+}
+
+.file-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--pastel-pink);
+  color: var(--text-color);
+  padding: 8px 14px;
+  border-radius: 14px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+/* ==========================================================================
+   4. FOLDING ANIMATION STAGE
+   ========================================================================== */
+.fold-stage {
+  position: relative;
+  width: 100%;
+  height: 380px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.fold-object {
+  background: var(--paper-bg);
+  border: 3px solid var(--pastel-pink);
+  border-radius: 12px;
+  width: 180px;
+  height: 120px;
   display: flex;
   justify-content: center;
   align-items: center;
-  backdrop-filter: blur(2px);
-  transition: opacity 0.4s ease;
+  color: var(--text-color);
+  font-weight: bold;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+  transition: all 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
 
-.hidden {
-  display: none;
+.fold-object.step-2 {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: var(--pastel-pink);
+}
+
+.fold-object.step-3 {
+  width: 0px;
+  height: 0px;
   opacity: 0;
-  pointer-events: none;
 }
 
-.paper-note {
-  background: #eef2f5;
-  padding: 30px 40px;
-  border-radius: 4px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-  text-align: center;
-  position: relative;
-  max-width: 320px;
-  width: 90%;
-  animation: unfold 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+.star-spawn {
+  font-size: 70px;
+  opacity: 0;
+  transform: scale(0);
+  transition: all 0.6s ease-out;
+  filter: drop-shadow(0 0 25px var(--pastel-yellow));
 }
 
-@keyframes unfold {
-  from { transform: scale(0.6) rotate(-4deg); opacity: 0; }
-  to { transform: scale(1) rotate(0deg); opacity: 1; }
+.star-spawn.visible {
+  opacity: 1;
+  transform: scale(1.2);
 }
 
-.paper-btn {
-  background: none;
-  border: 1px solid #b0b5b9;
-  padding: 8px 14px;
-  font-size: 0.85rem;
-  margin: 10px 5px 0;
-  cursor: pointer;
-  color: #555;
-}
-
-.paper-btn:hover {
-  background: #e2e7ec;
+.star-spawn.fly-to-jar {
+  transform: translateY(180px) scale(0.2);
+  opacity: 0;
 }
