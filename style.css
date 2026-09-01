@@ -1,17 +1,465 @@
+:root {
+  --pink: #ed8eae;
+  --dark-pink: #d96d91;
+  --soft-pink: #fff1f6;
+  --paper-pink: #f8d1ce;
+  --text: #523b4d;
+  --muted: #a77e91;
+  --yellow: #f5c45d;
+  --blue: #92b8ff;
+  --purple: #b49af2;
+  --green: #79c9a2;
+}
 
-<!doctype html>
-<html lang="en">
-  <!-- <html lang="en" class="dark"> — uncomment for dark-by-default (replace the tag above; `dark` is a Tailwind variant, never `@apply` it) -->
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/pod-backups/starlight-collection/build/favicon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="My Little Jar is a tiny place for wishes, dreams, and happy memories." />
-    <title>My Little Jar — keep a little happiness here</title>
-    <script type="module" crossorigin src="/pod-backups/starlight-collection/build/assets/index-CJweDWWV.js"></script>
-    <link rel="stylesheet" crossorigin href="/pod-backups/starlight-collection/build/assets/index-EmfQ4OCu.css">
-  </head>
-  <body>
-    <div id="root"></div>
-  </body>
-</html>
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  color: var(--text);
+  background: #fff9fb;
+  font-family: "Trebuchet MS", "Avenir Next", sans-serif;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+.page {
+  min-height: 100vh;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 50% 10%, #fff0f5, transparent 35%),
+    #fff9fb;
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 980px;
+  margin: auto;
+  padding: 22px 28px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--text);
+  font-weight: 700;
+}
+
+.logo-star {
+  display: grid;
+  width: 38px;
+  height: 38px;
+  place-items: center;
+  color: white;
+  background: var(--pink);
+  border-radius: 14px;
+  box-shadow: 4px 5px 0 #f8dce5;
+  transform: rotate(-8deg);
+}
+
+.nav-link {
+  color: var(--muted);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.nav-link:hover,
+.how-link:hover {
+  color: var(--dark-pink);
+}
+
+.hero {
+  position: relative;
+  max-width: 760px;
+  margin: auto;
+  padding: 70px 24px 100px;
+  text-align: center;
+}
+
+.eyebrow {
+  display: inline-block;
+  padding: 9px 15px;
+  color: #c37992;
+  background: #fff0f5;
+  border: 1px solid #f4c9d7;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.hero h1 {
+  margin: 22px 0 12px;
+  color: var(--text);
+  font-size: clamp(58px, 11vw, 116px);
+  line-height: 0.86;
+  letter-spacing: -0.09em;
+}
+
+.hero h1 span {
+  display: block;
+  color: var(--pink);
+}
+
+.intro {
+  max-width: 390px;
+  margin: 25px auto;
+  color: var(--muted);
+  font-size: 19px;
+  line-height: 1.7;
+}
+
+.jar-scene {
+  position: relative;
+  width: 330px;
+  height: 355px;
+  margin: 20px auto 0;
+}
+
+.jar-shadow {
+  position: absolute;
+  left: 50%;
+  bottom: 18px;
+  width: 230px;
+  height: 32px;
+  background: rgba(211, 126, 154, 0.18);
+  border-radius: 50%;
+  filter: blur(10px);
+  transform: translateX(-50%);
+}
+
+.jar-lid {
+  position: absolute;
+  z-index: 2;
+  top: 40px;
+  left: 50%;
+  width: 190px;
+  height: 44px;
+  background: #efb0c5;
+  border: 7px solid white;
+  border-radius: 17px 17px 10px 10px;
+  box-shadow: inset 0 -7px rgba(207, 100, 136, 0.16);
+  transform: translateX(-50%);
+}
+
+.jar {
+  position: absolute;
+  top: 70px;
+  left: 50%;
+  width: 178px;
+  height: 245px;
+  overflow: hidden;
+  background: linear-gradient(
+    145deg,
+    rgba(255, 255, 255, 0.75),
+    rgba(255, 207, 225, 0.65)
+  );
+  border: 8px solid rgba(255, 255, 255, 0.9);
+  border-radius: 40% 40% 25% 25%;
+  box-shadow:
+    0 25px 45px rgba(218, 130, 159, 0.22),
+    inset 12px 0 rgba(255, 255, 255, 0.35);
+  transform: translateX(-50%);
+}
+
+.jar-shine {
+  position: absolute;
+  top: 24px;
+  left: 19px;
+  width: 20px;
+  height: 125px;
+  background: rgba(255, 255, 255, 0.55);
+  border-radius: 99px;
+  transform: rotate(5deg);
+}
+
+.jar-stars {
+  position: absolute;
+  inset: 55px 23px 45px;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.star {
+  font-size: 27px;
+  filter: drop-shadow(2px 3px 2px rgba(130, 77, 100, 0.12));
+  animation: float 4s ease-in-out infinite;
+}
+
+.star:nth-child(2) {
+  animation-delay: 0.4s;
+}
+
+.star:nth-child(3) {
+  animation-delay: 0.8s;
+}
+
+.star:nth-child(4) {
+  animation-delay: 1.2s;
+}
+
+.pink {
+  color: var(--pink);
+}
+
+.yellow {
+  color: var(--yellow);
+}
+
+.blue {
+  color: var(--blue);
+}
+
+.purple {
+  color: var(--purple);
+}
+
+.green {
+  color: var(--green);
+}
+
+.coral {
+  color: #f58c78;
+}
+
+.jar-heart {
+  position: absolute;
+  bottom: 18px;
+  left: 50%;
+  color: #f19ab3;
+  font-size: 22px;
+  transform: translateX(-50%);
+}
+
+.quote {
+  margin: -8px 0 25px;
+  color: #b67d94;
+  font-size: 16px;
+  font-style: italic;
+}
+
+.primary-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  min-width: 220px;
+  padding: 16px 26px;
+  color: white;
+  background: var(--pink);
+  border: 0;
+  border-radius: 999px;
+  box-shadow: 0 6px 0 #f6d1dd;
+  cursor: pointer;
+  font-weight: 700;
+  transition:
+    transform 180ms ease,
+    background-color 180ms ease;
+}
+
+.primary-button:hover {
+  background: var(--dark-pink);
+  transform: translateY(-3px);
+}
+
+.how-link {
+  display: block;
+  width: fit-content;
+  margin: 25px auto 0;
+  color: var(--muted);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.sparkle {
+  position: absolute;
+  color: var(--yellow);
+  font-size: 28px;
+  animation: sparkle 3s ease-in-out infinite;
+}
+
+.sparkle-one {
+  top: 180px;
+  left: 12%;
+}
+
+.sparkle-two {
+  top: 280px;
+  right: 12%;
+  color: var(--purple);
+  animation-delay: 0.8s;
+}
+
+.sparkle-three {
+  top: 570px;
+  left: 16%;
+  color: var(--green);
+  animation-delay: 1.4s;
+}
+
+.create-section {
+  max-width: 560px;
+  margin: 20px auto 90px;
+  padding: 55px 25px;
+  text-align: center;
+  background: #fff4f7;
+  border: 1px solid #f4d4df;
+  border-radius: 35px;
+}
+
+.create-section h2 {
+  margin: 16px 0 8px;
+  font-size: 42px;
+  letter-spacing: -0.07em;
+}
+
+.create-section p {
+  color: var(--muted);
+}
+
+.jar-form {
+  margin-top: 30px;
+  text-align: left;
+}
+
+.jar-form label {
+  display: block;
+  margin: 18px 0 8px;
+  color: #97677d;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.jar-form input {
+  width: 100%;
+  padding: 15px;
+  color: var(--text);
+  background: white;
+  border: 1px solid #efc6d4;
+  border-radius: 16px;
+  outline: none;
+}
+
+.jar-form input:focus {
+  border-color: var(--pink);
+  box-shadow: 0 0 0 4px rgba(237, 142, 174, 0.15);
+}
+
+.jar-form .primary-button {
+  width: 100%;
+  margin-top: 25px;
+}
+
+.steps {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  max-width: 980px;
+  margin: auto;
+  padding: 0 28px 80px;
+}
+
+.step-card {
+  padding: 22px;
+  background: rgba(255, 255, 255, 0.65);
+  border: 1px solid #f2d7e0;
+  border-radius: 24px;
+}
+
+.step-card span {
+  color: var(--pink);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.step-card h3 {
+  margin: 14px 0 7px;
+  font-size: 17px;
+}
+
+.step-card p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+footer {
+  padding: 30px;
+  color: #bf91a4;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0);
+  }
+
+  50% {
+    transform: translateY(-10px) rotate(8deg);
+  }
+}
+
+@keyframes sparkle {
+  0%,
+  100% {
+    opacity: 0.5;
+    transform: scale(0.9) rotate(0);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1.1) rotate(12deg);
+  }
+}
+
+@media (max-width: 650px) {
+  .topbar {
+    padding: 18px;
+  }
+
+  .nav-link {
+    display: none;
+  }
+
+  .hero {
+    padding-top: 55px;
+  }
+
+  .jar-scene {
+    transform: scale(0.9);
+  }
+
+  .steps {
+    grid-template-columns: 1fr;
+  }
+
+  .create-section {
+    margin-right: 18px;
+    margin-left: 18px;
+  }
+}
