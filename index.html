@@ -7,121 +7,221 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <main class="page">
 
-    <header class="topbar">
-      <a href="#" class="logo">
-        <span class="logo-star">✦</span>
-        My Little Jar
+  <div class="site-wrapper">
+
+    <header class="navbar">
+      <a href="#" class="brand">
+        <span class="brand-icon">✦</span>
+        <span>My Little Jar</span>
       </a>
 
-      <a href="#how-it-works" class="nav-link">How it works ♡</a>
+      <a href="#how-it-works" class="nav-link">
+        How it works ♡
+      </a>
     </header>
 
-    <section class="hero">
-      <div class="sparkle sparkle-one">✦</div>
-      <div class="sparkle sparkle-two">✧</div>
-      <div class="sparkle sparkle-three">✦</div>
+    <main>
 
-      <span class="eyebrow">a tiny place for big feelings</span>
+      <!-- Landing Section -->
+      <section class="hero">
+        <span class="eyebrow">a tiny place for big feelings</span>
 
-      <h1>
-        My Little
-        <span>Jar</span>
-      </h1>
+        <h1>
+          My Little
+          <span>Jar</span>
+        </h1>
 
-      <p class="intro">
-        A tiny place for your wishes, dreams
-        and happy moments ♡
-      </p>
+        <p class="hero-text">
+          A tiny place for your wishes, dreams
+          and happy moments ♡
+        </p>
 
-      <div class="jar-scene">
-        <div class="jar-shadow"></div>
+        <div class="floating floating-one">✦</div>
+        <div class="floating floating-two">✧</div>
+        <div class="floating floating-three">♥</div>
 
-        <div class="jar-lid"></div>
+        <div class="jar-wrapper">
+          <div class="jar-shadow"></div>
+          <div class="jar-lid"></div>
 
-        <div class="jar">
-          <div class="jar-shine"></div>
+          <div class="jar">
+            <div class="jar-shine"></div>
 
-          <div class="jar-stars">
-            <span class="star pink">★</span>
-            <span class="star yellow">✦</span>
-            <span class="star blue">★</span>
-            <span class="star purple">✧</span>
-            <span class="star green">★</span>
-            <span class="star coral">✦</span>
-            <span class="star pink">✧</span>
+            <div class="stars">
+              <span class="star pink">★</span>
+              <span class="star yellow">✦</span>
+              <span class="star blue">★</span>
+              <span class="star purple">✧</span>
+              <span class="star green">★</span>
+              <span class="star coral">✦</span>
+              <span class="star pink">✧</span>
+            </div>
+
+            <div class="jar-heart">♥</div>
+          </div>
+        </div>
+
+        <p class="quote">
+          “Keep a little happiness here.”
+        </p>
+
+        <a href="#create" class="primary-button">
+          ✦ Create My Jar
+        </a>
+
+        <a href="#how-it-works" class="how-link">
+          ♡ How it works
+        </a>
+      </section>
+
+      <!-- Create Jar Section -->
+      <section id="create" class="create-card">
+        <span class="eyebrow">your cozy beginning</span>
+
+        <h2>Create Your Jar</h2>
+
+        <p class="section-description">
+          Give your happy memories a tiny home.
+        </p>
+
+        <form class="jar-form">
+          <label for="jar-name">What shall we call it?</label>
+          <input
+            id="jar-name"
+            type="text"
+            placeholder="My Happy Little Jar ♡"
+          />
+
+          <label for="owner-name">Your name</label>
+          <input
+            id="owner-name"
+            type="text"
+            placeholder="Yamini"
+          />
+
+          <button type="submit" class="primary-button full-width">
+            ✨ Start My Jar
+          </button>
+        </form>
+      </section>
+
+      <!-- Main Jar Experience -->
+      <section class="dashboard-card">
+        <div class="dashboard-heading">
+          <div>
+            <span class="eyebrow">your happy place</span>
+            <h2>Hi Yamini ♡</h2>
+            <p>My Happy Little Jar</p>
           </div>
 
-          <div class="jar-heart">♥</div>
+          <button class="settings-button">⚙</button>
         </div>
-      </div>
 
-      <p class="quote">“Keep a little happiness here.”</p>
+        <div class="small-jar-wrapper">
+          <div class="small-jar-lid"></div>
 
-      <a href="#create" class="primary-button">
-        ✦ Create My Jar
-      </a>
+          <div class="small-jar">
+            <div class="small-stars">
+              <span>★</span>
+              <span>✦</span>
+              <span>♥</span>
+              <span>✧</span>
+              <span>★</span>
+            </div>
+          </div>
+        </div>
 
-      <a href="#how-it-works" class="how-link">
-        ♡ How it works
-      </a>
-    </section>
+        <p class="star-count">
+          <strong>12</strong> little stars
+        </p>
 
-    <section id="create" class="create-section">
-      <span class="eyebrow">your cozy beginning</span>
-
-      <h2>Create Your Jar</h2>
-
-      <p>
-        Give your happy memories a tiny home.
-      </p>
-
-      <form class="jar-form">
-        <label for="jar-name">What shall we call it?</label>
-        <input
-          id="jar-name"
-          type="text"
-          placeholder="My Happy Little Jar ♡"
-        />
-
-        <label for="your-name">Your name</label>
-        <input
-          id="your-name"
-          type="text"
-          placeholder="Yamini"
-        />
-
-        <button type="submit" class="primary-button">
-          ✦ Start My Jar
+        <button class="primary-button full-width">
+          ⭐ Add a Star
         </button>
-      </form>
-    </section>
 
-    <section id="how-it-works" class="steps">
-      <div class="step-card">
-        <span>01</span>
-        <h3>Write a feeling</h3>
-        <p>Leave a tiny note for your future self.</p>
-      </div>
+        <div class="dashboard-actions">
+          <button>💌 Share this Jar</button>
+          <button>🔐 Save My Stars</button>
+        </div>
 
-      <div class="step-card">
-        <span>02</span>
-        <h3>Fold a star</h3>
-        <p>Turn your memory into something magical.</p>
-      </div>
+        <div class="mascot">
+          <div class="bunny">
+            <span class="ear ear-left"></span>
+            <span class="ear ear-right"></span>
+            <div class="bunny-face">
+              <span class="eye eye-left"></span>
+              <span class="eye eye-right"></span>
+              <span class="nose"></span>
+            </div>
+          </div>
 
-      <div class="step-card">
-        <span>03</span>
-        <h3>Open it later</h3>
-        <p>Find a little happiness whenever you need it.</p>
-      </div>
-    </section>
+          <p>tap the jar for a memory!</p>
+        </div>
+      </section>
+
+      <!-- Add Star Section -->
+      <section class="memory-card">
+        <span class="memory-star">✦</span>
+
+        <h2>A little note ♡</h2>
+
+        <p class="section-description">
+          Write something your future self will love finding.
+        </p>
+
+        <div class="paper">
+          <textarea
+            placeholder="Dear future me...
+
+Today I am grateful for..."
+          ></textarea>
+        </div>
+
+        <div class="paper-actions">
+          <button>📷 Add a photo</button>
+          <span>📅 Today</span>
+        </div>
+
+        <button class="primary-button full-width">
+          🎀 Fold My Note
+        </button>
+      </section>
+
+      <!-- How It Works -->
+      <section id="how-it-works" class="steps-section">
+        <span class="eyebrow">our little ritual</span>
+
+        <h2>How it works</h2>
+
+        <div class="steps">
+          <article class="step">
+            <span>01</span>
+            <h3>Write a feeling</h3>
+            <p>Leave a tiny note for your future self.</p>
+          </article>
+
+          <article class="step">
+            <span>02</span>
+            <h3>Fold a star</h3>
+            <p>Watch your memory become something magical.</p>
+          </article>
+
+          <article class="step">
+            <span>03</span>
+            <h3>Open it later</h3>
+            <p>Find a little happiness whenever you need it.</p>
+          </article>
+        </div>
+      </section>
+
+    </main>
 
     <footer>
       made for the soft-hearted ✦
     </footer>
 
-  </main>
+  </div>
+
 </body>
 </html>
