@@ -1,96 +1,29 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Jar of Wishes</title>
-  <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600;700&display=swap">
+  <!-- <html lang="en" class="dark"> — uncomment for dark-by-default (replace the tag above; `dark` is a Tailwind variant, never `@apply` it) -->
+  <head>
+    <script type="module">import { injectIntoGlobalHook } from "/@react-refresh";
+injectIntoGlobalHook(window);
+window.$RefreshReg$ = () => {};
+window.$RefreshSig$ = () => (type) => type;</script>
+
+    <script type="module" src="/@vite/client"></script>
+
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="My Little Jar is a tiny place for wishes, dreams, and happy memories." />
+    <title>My Little Jar — keep a little happiness here</title>
+  <script>
+if(window.self!==window.top){
+  var s=document.createElement("script");s.src="/visual-edit-overlay.js";document.head.appendChild(s);
+  window.tailwind=window.tailwind||{};tailwind.config={corePlugins:{preflight:false}};var t=document.createElement("script");t.src="https://cdn.tailwindcss.com";document.head.appendChild(t);
+}
+</script>
 </head>
-<body>
-
-  <div class="space-container">
-    <div class="twinkle-stars"></div>
-    <div class="nebula-glow left-glow"></div>
-    <div class="nebula-glow right-glow"></div>
-
-    <span class="sparkle star-1">✦</span>
-    <span class="sparkle star-2">✦</span>
-    <span class="sparkle star-3">✦</span>
-    <div class="spiral-galaxy top-left"></div>
-    <div class="spiral-galaxy top-right"></div>
-
-    <!-- MAIN SCENE CONTAINER -->
-    <div id="main-screen" class="screen active">
-      <main class="scene">
-        
-        <div class="title-group">
-          <h1 class="kawaii-text gradient-text">JAR OF<br>WISHES</h1>
-          <span class="sparkle title-sparkle">✧</span>
-        </div>
-
-        <!-- Interactive Jar Element -->
-        <div class="jar-wrapper" id="jar-btn">
-          <div class="kawaii-jar">
-            <div class="jar-lid">
-              <div class="bow">🎀</div>
-            </div>
-            <div class="jar-body">
-              <div class="jar-face">● ‿ ●</div>
-              <div class="star-fill">
-                <span class="mini-star s1">⭐</span>
-                <span class="mini-star s2">🌟</span>
-                <span class="mini-star s3">⭐</span>
-                <span class="mini-star s4">🌟</span>
-                <span class="mini-star s5">⭐</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="action-group">
-          <div class="star-character">
-            <div class="star-shape">★</div>
-            <div class="star-face">◕ ‿ ◕</div>
-          </div>
-          <h2 class="kawaii-text sub-text">TAP TO WRITE<br>YOUR WISH</h2>
-        </div>
-
-      </main>
-    </div>
-
-    <!-- WISH NOTE POPUP SCREEN -->
-    <div id="note-screen" class="screen hidden">
-      <div class="note-card">
-        <div class="tape"></div>
-        <div class="note-header">
-          <span class="star-deco">★</span>
-          <span class="close-btn" id="close-note">×</span>
-        </div>
-        <div class="note-content">
-          <p id="wish-text">"i have a great day"</p>
-          <span id="wish-date">August 30, 2026</span>
-        </div>
-        <div class="note-actions">
-          <button id="tuck-btn">tuck it back</button>
-          <button id="unfold-btn">unfold another</button>
-        </div>
-      </div>
-    </div>
-
-    <!-- Foreground Hills & Flowers -->
-    <div class="foreground-landscape">
-      <div class="hill left-hill">
-        <span class="flower f1">🌸</span>
-        <span class="flower f2">🌼</span>
-      </div>
-      <div class="hill right-hill">
-        <span class="flower f3">🌺</span>
-        <span class="flower f4">🌸</span>
-      </div>
-    </div>
-  </div>
-
-  <script src="script.js"></script>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/v3d52b47920f24c319d37e2661827c42b1787588026925" integrity="sha512-d9sL6GJLXn6fInD1+TVXhTcQOsmxeHfmHAvwGDIxp5TO+uo1fiWW7mHomMj4MLRlCsJDTqXzWLHJFFlPCEIj/A==" data-cf-beacon='{"version":"2024.11.0","token":"7f7b0fd8732c4326aae4b9d58d5c514a"}' crossorigin="anonymous"></script>
 </body>
 </html>
