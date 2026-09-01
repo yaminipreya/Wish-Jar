@@ -1,31 +1,65 @@
-function goToStep(stepNumber) {
-    // Update step contents
-    const steps = document.querySelectorAll('.simulator-step-content');
-    steps.forEach(step => step.classList.remove('active'));
-    document.getElementById(`step-${stepNumber}`).classList.add('active');
+const modal = document.getElementById("jarModal");
 
-    // Update progress bar circles
-    const progressSteps = document.querySelectorAll('.progress-step');
-    progressSteps.forEach((pStep, index) => {
-        if (index + 1 <= stepNumber) {
-            pStep.classList.add('active');
-        } else {
-            pStep.classList.remove('active');
-        }
-    });
+const createJarBtn = document.getElementById("createJarBtn");
+const openJarBtn = document.getElementById("openJarBtn");
 
-    // Dynamic updates based on inputs
-    if (stepNumber === 2) {
-        const customName = document.getElementById('jarNameInput').value;
-        if(customName) {
-            document.getElementById('displayJarTitle').innerText = customName;
-        }
-    }
+const closeModal = document.getElementById("closeModal");
 
-    // Smooth scroll to simulator
-    document.getElementById('simulator').scrollIntoView({ behavior: 'smooth' });
+const continueBtn = document.getElementById("continueBtn");
+
+const jarName = document.getElementById("jarName");
+
+
+function openModal() {
+  modal.classList.add("active");
 }
 
-function scrollToSimulator() {
-    document.getElementById('simulator').scrollIntoView({ behavior: 'smooth' });
+
+function closeJarModal() {
+  modal.classList.remove("active");
 }
+
+
+createJarBtn.addEventListener("click", openModal);
+
+openJarBtn.addEventListener("click", openModal);
+
+closeModal.addEventListener("click", closeJarModal);
+
+
+continueBtn.addEventListener("click", function () {
+
+  const name = jarName.value.trim();
+
+  if (name === "") {
+    alert("Please give your little jar a name 💖");
+    jarName.focus();
+    return;
+  }
+
+  alert(
+    `Yay! ✨ "${name}" is ready for your beautiful wishes! 🫙💖`
+  );
+
+  closeJarModal();
+
+  jarName.value = "";
+});
+
+
+modal.addEventListener("click", function (event) {
+
+  if (event.target === modal) {
+    closeJarModal();
+  }
+
+});
+
+
+document.addEventListener("keydown", function (event) {
+
+  if (event.key === "Escape") {
+    closeJarModal();
+  }
+
+});
