@@ -1,26 +1,75 @@
 /* =========================
-   MOBILE MENU
+   ELEMENTS
 ========================= */
 
-const menuBtn = document.getElementById("menuBtn");
-const navLinks = document.getElementById("navLinks");
+const createButtons =
+  document.querySelectorAll(".createJar");
 
-menuBtn.addEventListener("click", () => {
+const jarModal =
+  document.getElementById("jarModal");
 
-    navLinks.classList.toggle("mobile-active");
+const closeModal =
+  document.getElementById("closeModal");
+
+const createJarButton =
+  document.getElementById("createJarButton");
+
+const jarName =
+  document.getElementById("jarName");
+
+const toast =
+  document.getElementById("toast");
+
+const addWish =
+  document.getElementById("addWish");
+
+const wishDate =
+  document.getElementById("wishDate");
+
+const savedWishText =
+  document.getElementById("savedWishText");
+
+const stars =
+  document.querySelectorAll(".click-star");
+
+const viewWishes =
+  document.getElementById("viewWishes");
+
+
+/* =========================
+   SET TODAY'S DATE
+========================= */
+
+const today = new Date();
+
+const formattedDate =
+  today.toISOString().split("T")[0];
+
+wishDate.value = formattedDate;
+
+
+/* =========================
+   OPEN CREATE JAR MODAL
+========================= */
+
+createButtons.forEach(button => {
+
+  button.addEventListener("click", () => {
+
+    jarModal.classList.add("show");
+
+  });
 
 });
 
 
-/* Close mobile menu after clicking a link */
+/* =========================
+   CLOSE MODAL
+========================= */
 
-document.querySelectorAll(".nav-links a").forEach(link => {
+closeModal.addEventListener("click", () => {
 
-    link.addEventListener("click", () => {
-
-        navLinks.classList.remove("mobile-active");
-
-    });
+  jarModal.classList.remove("show");
 
 });
 
@@ -29,113 +78,136 @@ document.querySelectorAll(".nav-links a").forEach(link => {
    CREATE JAR
 ========================= */
 
-const jarModal = document.getElementById("jarModal");
+createJarButton.addEventListener("click", () => {
 
-function createJar() {
-
-    jarModal.classList.add("active");
-
-    setTimeout(() => {
-
-        document.getElementById("jarName").focus();
-
-    }, 100);
-
-}
+  const name =
+    jarName.value.trim();
 
 
-function closeJar() {
+  if (name === "") {
 
-    jarModal.classList.remove("active");
+    jarName.focus();
 
-}
+    return;
+
+  }
 
 
-function startJar() {
+  /* Save jar name */
 
-    const jarName =
-        document.getElementById("jarName").value.trim();
+  localStorage.setItem(
+    "wishJarName",
+    name
+  );
 
-    if (!jarName) {
 
-        alert("Please give your jar a beautiful name ✨");
+  jarModal.classList.remove("show");
 
-        return;
 
-    }
+  showToast(
+    "🐰✨ Yay! Your magical jar is ready!"
+  );
 
-    localStorage.setItem("whimsyJarName", jarName);
 
-    closeJar();
+});
 
-    alert(
-        `✨ "${jarName}" has been created!\n\nYour magical memory journey begins now.`
+
+/* =========================
+   ADD WISH
+========================= */
+
+addWish.addEventListener("click", () => {
+
+  showToast(
+    "💌✨ Your wish is turning into magic..."
+  );
+
+
+  setTimeout(() => {
+
+    showToast(
+      "⭐ Your wish safely reached the magical jar!"
     );
+
+  }, 1200);
+
+});
+
+
+/* =========================
+   CLICK STAR
+========================= */
+
+stars.forEach(star => {
+
+  star.addEventListener("click", () => {
+
+    const wish =
+      star.dataset.wish;
+
+
+    savedWishText.textContent =
+      wish;
+
+
+    showToast(
+      "🐰💗 Your magical memory is open!"
+    );
+
+  });
+
+});
+
+
+/* =========================
+   VIEW WISHES
+========================= */
+
+viewWishes.addEventListener("click", () => {
+
+  document
+    .querySelector(".small-jar")
+    .scrollIntoView({
+
+      behavior: "smooth",
+      block: "center"
+
+    });
+
+});
+
+
+/* =========================
+   TOAST FUNCTION
+========================= */
+
+function showToast(message) {
+
+  toast.textContent = message;
+
+  toast.classList.add("show");
+
+
+  setTimeout(() => {
+
+    toast.classList.remove("show");
+
+  }, 3000);
 
 }
 
 
 /* =========================
-   LOGIN
+   CLOSE MODAL OUTSIDE
 ========================= */
 
-const loginModal =
-    document.getElementById("loginModal");
+window.addEventListener("click", event => {
 
+  if (event.target === jarModal) {
 
-function openLogin() {
+    jarModal.classList.remove("show");
 
-    loginModal.classList.add("active");
-
-}
-
-
-function closeLogin() {
-
-    loginModal.classList.remove("active");
-
-}
-
-
-function loginUser() {
-
-    const email =
-        document.getElementById("loginEmail").value.trim();
-
-    if (!email) {
-
-        alert("Please enter your email address ✨");
-
-        return;
-
-    }
-
-    alert(
-        `Welcome back! ✨\n\nA login link would be sent to ${email}.`
-    );
-
-    closeLogin();
-
-}
-
-
-/* =========================
-   CLOSE MODALS
-========================= */
-
-window.addEventListener("click", (event) => {
-
-    if (event.target === loginModal) {
-
-        closeLogin();
-
-    }
-
-    if (event.target === jarModal) {
-
-        closeJar();
-
-    }
+  }
 
 });
 
@@ -144,56 +216,12 @@ window.addEventListener("click", (event) => {
    ESCAPE KEY
 ========================= */
 
-document.addEventListener("keydown", (event) => {
+document.addEventListener("keydown", event => {
 
-    if (event.key === "Escape") {
+  if (event.key === "Escape") {
 
-        closeLogin();
-        closeJar();
+    jarModal.classList.remove("show");
 
-    }
-
-});
-
-
-/* =========================
-   SCROLL REVEAL
-========================= */
-
-const revealElements = document.querySelectorAll(
-    ".step, .feature-card, .story-section, .cta-section"
-);
-
-const observer = new IntersectionObserver(
-
-    (entries) => {
-
-        entries.forEach(entry => {
-
-            if (entry.isIntersecting) {
-
-                entry.target.style.opacity = "1";
-                entry.target.style.transform = "translateY(0)";
-
-            }
-
-        });
-
-    },
-
-    {
-        threshold: 0.15
-    }
-
-);
-
-
-revealElements.forEach(element => {
-
-    element.style.opacity = "0";
-    element.style.transform = "translateY(25px)";
-    element.style.transition = "opacity .7s ease, transform .7s ease";
-
-    observer.observe(element);
+  }
 
 });
