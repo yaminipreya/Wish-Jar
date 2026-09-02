@@ -3,251 +3,520 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>A Little Jar of Wishes ✨</title>
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Alpine.js for interactive states -->
-    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
-    <!-- Google Fonts for Playful Handwriting & Rounded Sans -->
-    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;600;700&family=DynaPuff:wght@500;700&display=swap" rel="stylesheet">
-    
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        cream: '#FFF9F5',
-                        pastelPink: '#F8C8D8',
-                        lavender: '#DCCEF9',
-                        skyBlue: '#CDEAF7',
-                        softYellow: '#FFE7A3',
-                        jarText: '#5E4B56'
-                    },
-                    fontFamily: {
-                        heading: ['"DynaPuff"', 'cursive'],
-                        body: ['"Quicksand"', 'sans-serif'],
-                    }
-                }
-            }
-        }
-    </script>
+
+    <title>A Little Jar of Wishes</title>
+
     <link rel="stylesheet" href="style.css">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Handlee&display=swap" rel="stylesheet">
 </head>
-<body class="bg-cream text-jarText min-h-screen flex flex-col selection:bg-pastelPink selection:text-jarText" x-data="wishApp()">
 
-    <!-- 1️⃣ FLOATING GLASS NAVBAR -->
-    <header class="w-full px-6 py-4 fixed top-0 z-50 flex justify-center">
-        <nav class="w-full max-w-5xl bg-white/70 backdrop-blur-md border border-white/60 shadow-lg rounded-full px-8 py-3 flex items-center justify-between">
-            <div class="flex items-center space-x-2 font-heading text-lg font-bold cursor-pointer" @click="currentView = 'home'">
-                <span>🫙</span>
-                <span>A Little Jar of Wishes</span>
-            </div>
-            
-            <div class="hidden md:flex items-center space-x-8 font-semibold text-sm">
-                <button @click="currentView = 'home'" class="hover:text-pastelPink transition">Home</button>
-                <button @click="scrollToHowItWorks()" class="hover:text-pastelPink transition">How It Works</button>
-                <button @click="currentView = 'dashboard'" class="hover:text-pastelPink transition">My Jar</button>
-            </div>
+<body>
 
-            <button @click="currentView = 'onboarding'" class="bg-pastelPink text-jarText px-5 py-2 rounded-full font-bold text-sm shadow-md hover:scale-105 active:scale-95 transition flex items-center space-x-1">
-                <span>Create My Jar</span>
-                <span>✨</span>
+    <!-- =========================
+         NAVIGATION
+    ========================== -->
+
+    <nav class="navbar">
+
+        <div class="logo">
+            <div class="logo-jar">🫙</div>
+
+            <div>
+                <span>A Little</span>
+                <h2>Jar of Wishes</h2>
+            </div>
+        </div>
+
+
+        <div class="nav-links">
+            <a href="#home" class="active">Home</a>
+            <a href="#how-it-works">How It Works</a>
+            <a href="#my-jar">My Jar</a>
+        </div>
+
+
+        <button class="create-btn" id="createJarBtn">
+            🪽 Create My Jar ✨
+        </button>
+
+    </nav>
+
+
+    <!-- =========================
+         HERO SECTION
+    ========================== -->
+
+    <main id="home" class="hero">
+
+        <!-- Floating decorations -->
+
+        <div class="floating-star star-one">✦</div>
+        <div class="floating-star star-two">☆</div>
+        <div class="floating-origami paper-one">◢</div>
+        <div class="floating-origami paper-two">◣</div>
+
+
+        <!-- Hero Content -->
+
+        <div class="hero-content">
+
+            <p class="small-title">✨ A magical place for your dreams</p>
+
+            <h1>
+                A tiny place for
+                <span>your biggest wishes</span>
+            </h1>
+
+            <p class="hero-description">
+                Write your wishes. Keep them safe.
+                <br>
+                Come back someday and see how far you've come.
+            </p>
+
+
+            <button class="primary-btn" id="startWishBtn">
+                Create My Wish Jar ✨
             </button>
-        </nav>
-    </header>
 
-    <!-- MAIN CONTAINER -->
-    <main class="flex-grow pt-28 pb-16 px-4 sm:px-6">
+        </div>
 
-        <!-- 2️⃣ HOME VIEW -->
-        <template x-if="currentView === 'home'">
-            <div class="max-w-5xl mx-auto space-y-20">
-                <!-- Hero Section -->
-                <section class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-                    <div class="space-y-6">
-                        <div class="inline-block bg-lavender/60 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider">
-                            ✨ A magical little place
-                        </div>
-                        <h1 class="text-4xl md:text-5xl font-bold leading-tight">
-                            Keep your wishes safe, one little dream at a time.
-                        </h1>
-                        <p class="text-lg opacity-90">
-                            Capture your core desires, store them in your transparent magical jar, and watch your dreams grow.
-                        </p>
-                        <div class="pt-2">
-                            <button @click="currentView = 'onboarding'" class="bg-pastelPink text-jarText px-8 py-4 rounded-full font-bold shadow-md hover:scale-105 transition flex items-center space-x-2 text-base">
-                                <span>✨ Create Your Jar</span>
-                            </button>
-                        </div>
-                    </div>
 
-                    <!-- Floating Jar Graphic Element -->
-                    <div class="relative flex justify-center items-center">
-                        <div class="absolute w-64 h-64 bg-skyBlue/30 rounded-full blur-2xl -z-10"></div>
-                        <div class="bg-white/60 border border-white backdrop-blur-sm p-8 rounded-3xl shadow-xl animate-float text-center space-y-4">
-                            <div class="text-7xl">🫙</div>
-                            <div class="flex justify-center space-x-2 text-xl">
-                                <span>💌</span><span>⭐</span><span>✨</span>
-                            </div>
-                            <p class="text-xs font-bold opacity-75">Your safe space for aspirations</p>
-                        </div>
-                    </div>
-                </section>
+        <!-- Jar -->
 
-                <!-- 3️⃣ HOW IT WORKS TIMELINE -->
-                <section id="how-it-works" class="space-y-10 pt-10">
-                    <div class="text-center space-y-2">
-                        <h2 class="text-3xl font-bold">How It Works</h2>
-                        <p class="text-sm opacity-80">Simple steps to manifest your magical reality</p>
-                    </div>
+        <div class="jar-container">
 
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                        <div class="bg-white/70 border border-white backdrop-blur-sm p-6 rounded-3xl shadow-md space-y-3 transform rotate-1">
-                            <div class="w-8 h-8 rounded-full bg-pastelPink flex items-center justify-center font-bold text-sm">1</div>
-                            <h3 class="font-bold text-lg flex items-center space-x-2"><span>💌</span> <span>Write</span></h3>
-                            <p class="text-sm opacity-80">Write your wish straight from your heart with authentic intention.</p>
-                        </div>
-                        <div class="bg-white/70 border border-white backdrop-blur-sm p-6 rounded-3xl shadow-md space-y-3 transform -rotate-1">
-                            <div class="w-8 h-8 rounded-full bg-skyBlue flex items-center justify-center font-bold text-sm">2</div>
-                            <h3 class="font-bold text-lg flex items-center space-x-2"><span>🫙</span> <span>Drop</span></h3>
-                            <p class="text-sm opacity-80">Put it securely inside your personalized digital magical jar.</p>
-                        </div>
-                        <div class="bg-white/70 border border-white backdrop-blur-sm p-6 rounded-3xl shadow-md space-y-3 transform rotate-1">
-                            <div class="w-8 h-8 rounded-full bg-softYellow flex items-center justify-center font-bold text-sm">3</div>
-                            <h3 class="font-bold text-lg flex items-center space-x-2"><span>✨</span> <span>Keep</span></h3>
-                            <p class="text-sm opacity-80">Watch your collection expand and collect stars as dreams blossom.</p>
-                        </div>
-                    </div>
-                </section>
+            <div class="wish-tag">
+                Your dreams matter ✨
             </div>
-        </template>
 
-        <!-- 4️⃣ ONBOARDING VIEW -->
-        <template x-if="currentView === 'onboarding'">
-            <div class="max-w-md mx-auto bg-white/80 backdrop-blur-md border border-white p-8 rounded-3xl shadow-xl space-y-6">
-                <div class="text-center space-y-3">
-                    <div class="flex justify-center space-x-2 text-xs font-bold text-pastelPink">
-                        <span class="text-jarText">●</span> <span>───</span> <span>○</span> <span>───</span> <span>○</span>
-                    </div>
-                    <h2 class="text-2xl font-bold">✨ Create Your Jar ✨</h2>
-                    <p class="text-sm opacity-80">What shall we call your little jar?</p>
-                </div>
+            <div class="jar-lid"></div>
 
-                <div class="space-y-4">
-                    <input type="text" x-model="jarName" class="w-full bg-cream border border-pastelPink/60 rounded-2xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-pastelPink text-center font-semibold text-lg" placeholder="My Dream Jar 🫙">
-                    
-                    <button @click="currentView = 'writeWish'" class="w-full bg-pastelPink text-jarText py-3.5 rounded-full font-bold shadow-md hover:scale-[1.02] transition text-center">
-                        Continue →
-                    </button>
-                </div>
+            <div class="jar">
+
+                <div class="origami pink"></div>
+                <div class="origami purple"></div>
+                <div class="origami yellow"></div>
+                <div class="origami blue"></div>
+                <div class="origami green"></div>
+
             </div>
-        </template>
 
-        <!-- 5️⃣ WRITE A WISH VIEW -->
-        <template x-if="currentView === 'writeWish'">
-            <div class="max-w-lg mx-auto bg-white/80 backdrop-blur-md border border-white p-8 rounded-3xl shadow-xl space-y-6">
-                <div class="text-center space-y-2">
-                    <h2 class="text-2xl font-bold flex items-center justify-center space-x-2">
-                        <span>💌</span><span>Write a little wish</span>
-                    </h2>
-                    <p class="text-sm opacity-80">What is living in your heart today?</p>
-                </div>
+            <div class="jar-bottom"></div>
 
-                <div class="space-y-4">
-                    <textarea rows="5" x-model="newWishText" class="w-full bg-cream border border-skyBlue/60 rounded-2xl p-4 focus:outline-none focus:ring-2 focus:ring-skyBlue text-sm leading-relaxed" placeholder="Dear Universe..."></textarea>
-                    
-                    <button @click="saveWish()" class="w-full bg-skyBlue text-jarText py-3.5 rounded-full font-bold shadow-md hover:scale-[1.02] transition flex items-center justify-center space-x-2">
-                        <span>Put Into My Jar</span>
-                        <span>🫙</span>
-                    </button>
-                </div>
-            </div>
-        </template>
+            <div class="jar-sparkle sparkle-one">✦</div>
+            <div class="jar-sparkle sparkle-two">✧</div>
 
-        <!-- 6️⃣ & 7️⃣ MY JAR DASHBOARD & WISHES VIEW -->
-        <template x-if="currentView === 'dashboard'">
-            <div class="max-w-2xl mx-auto space-y-8">
-                <!-- Dashboard Card -->
-                <div class="bg-white/80 backdrop-blur-md border border-white p-8 rounded-3xl shadow-xl text-center space-y-6">
-                    <div class="space-y-1">
-                        <p class="text-xs opacity-70">☁️ Hello! Welcome back</p>
-                        <h2 class="text-2xl font-bold text-pastelPink drop-shadow-sm" x-text="jarName || 'My Little Wish Jar'"></h2>
-                    </div>
-
-                    <!-- Stars Achievement -->
-                    <div class="flex justify-center space-x-1 text-softYellow text-xl">
-                        <span>⭐</span><span>⭐</span><span>⭐</span><span>⭐</span><span>☆</span>
-                    </div>
-
-                    <!-- Jar Central Visual Element -->
-                    <div class="inline-block bg-skyBlue/20 border border-skyBlue/40 px-10 py-6 rounded-3xl shadow-inner relative">
-                        <div class="text-6xl animate-float">🫙</div>
-                        <div class="text-xs mt-2 opacity-75">💌 <span x-text="wishes.length"></span> Wishes Inside</div>
-                    </div>
-
-                    <div class="pt-2 flex flex-col sm:flex-row gap-3 justify-center">
-                        <button @click="currentView = 'writeWish'" class="bg-pastelPink text-jarText px-6 py-3 rounded-full font-bold shadow-md hover:scale-105 transition text-sm">
-                            + Add a New Wish
-                        </button>
-                        <button @click="currentView = 'share'" class="bg-lavender text-jarText px-6 py-3 rounded-full font-bold shadow-md hover:scale-105 transition text-sm">
-                            🔗 Share Jar
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Floating Paper Notes (Your Wishes) -->
-                <div class="space-y-4">
-                    <div class="text-center">
-                        <h3 class="text-xl font-bold">✨ Your Little Wishes ✨</h3>
-                    </div>
-
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <template x-for="(wish, index) in wishes" :key="index">
-                            <div class="bg-white/70 border border-white p-5 rounded-2xl shadow-sm hover:shadow-md transition transform hover:-translate-y-1 relative cursor-pointer" :class="index % 2 === 0 ? 'rotate-1' : '-rotate-1'">
-                                <div class="flex items-start justify-between">
-                                    <span class="text-sm font-medium" x-text="'💌 ' + wish"></span>
-                                    <span class="text-xs text-softYellow">⭐</span>
-                                </div>
-                            </div>
-                        </template>
-                    </div>
-                </div>
-            </div>
-        </template>
-
-        <!-- 8️⃣ SHARE YOUR JAR VIEW -->
-        <template x-if="currentView === 'share'">
-            <div class="max-w-md mx-auto bg-white/80 backdrop-blur-md border border-white p-8 rounded-3xl shadow-xl text-center space-y-6">
-                <div class="text-4xl">🎀</div>
-                <div class="space-y-2">
-                    <h2 class="text-2xl font-bold">Share Your Little Jar</h2>
-                    <p class="text-sm opacity-80">Let someone special leave a wish for you</p>
-                </div>
-
-                <div class="bg-cream border border-lavender rounded-2xl p-3 text-xs font-mono opacity-80 select-all">
-                    yourwebsite.com/jar/my-dream-jar
-                </div>
-
-                <button @click="alert('Magical link copied to clipboard! ✨')" class="w-full bg-lavender text-jarText py-3.5 rounded-full font-bold shadow-md hover:scale-[1.02] transition">
-                    ✨ Copy Magical Link
-                </button>
-
-                <div>
-                    <button @click="currentView = 'dashboard'" class="text-xs font-bold underline opacity-70 hover:opacity-100">
-                        ← Back to My Dashboard
-                    </button>
-                </div>
-            </div>
-        </template>
+        </div>
 
     </main>
 
-    <!-- FOOTER INFO -->
-    <footer class="text-center py-6 text-xs opacity-60">
-        Made with love, stars, and cute dreams 🌙✨
-    </footer>
 
-    <!-- Script File Reference -->
+
+    <!-- =========================
+         HOW IT WORKS
+    ========================== -->
+
+    <section id="how-it-works" class="how-section">
+
+        <div class="section-heading">
+
+            <p>✨ Your Magical Journey ✨</p>
+
+            <h2>How It Works</h2>
+
+            <span>
+                Three tiny steps to keep your wishes safe.
+            </span>
+
+        </div>
+
+
+        <div class="steps-container">
+
+
+            <!-- STEP 1 -->
+
+            <div class="step-card">
+
+                <div class="step-number">01</div>
+
+                <div class="step-icon origami-icon">
+                    🪽
+                </div>
+
+                <h3>Write a Wish</h3>
+
+                <p>
+                    Write down anything
+                    your heart wishes for.
+                </p>
+
+            </div>
+
+
+            <!-- STEP 2 -->
+
+            <div class="step-arrow">
+                ⟶
+            </div>
+
+
+            <!-- STEP 2 -->
+
+            <div class="step-card">
+
+                <div class="step-number purple-number">02</div>
+
+                <div class="step-icon">
+                    🫙
+                </div>
+
+                <h3>Drop it in the Jar</h3>
+
+                <p>
+                    Put your magical
+                    wish safely inside.
+                </p>
+
+            </div>
+
+
+            <!-- STEP 3 -->
+
+            <div class="step-arrow">
+                ⟶
+            </div>
+
+
+            <!-- STEP 3 -->
+
+            <div class="step-card">
+
+                <div class="step-number blue-number">03</div>
+
+                <div class="step-icon">
+                    ⭐
+                </div>
+
+                <h3>Watch it Grow</h3>
+
+                <p>
+                    Come back anytime
+                    and see your dreams grow.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================
+         FEATURES
+    ========================== -->
+
+    <section class="features-section">
+
+        <div class="feature-card">
+
+            <div class="feature-icon">🔒</div>
+
+            <div>
+                <h4>Your Safe Space</h4>
+                <p>Your wishes are private and safe.</p>
+            </div>
+
+        </div>
+
+
+        <div class="feature-card">
+
+            <div class="feature-icon">🕒</div>
+
+            <div>
+                <h4>Come Back Anytime</h4>
+                <p>Revisit your wishes whenever you want.</p>
+            </div>
+
+        </div>
+
+
+        <div class="feature-card">
+
+            <div class="feature-icon">🪽</div>
+
+            <div>
+                <h4>Share the Magic</h4>
+                <p>Share your jar with someone special.</p>
+            </div>
+
+        </div>
+
+
+        <div class="feature-card">
+
+            <div class="feature-icon">⭐</div>
+
+            <div>
+                <h4>Save Your Memories</h4>
+                <p>Keep your wishes forever.</p>
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================
+         CREATE WISH SECTION
+    ========================== -->
+
+    <section id="my-jar" class="create-section">
+
+        <div class="create-card">
+
+            <div class="progress-bar">
+
+                <div class="progress-step active">1</div>
+                <div class="progress-line"></div>
+
+                <div class="progress-step">2</div>
+                <div class="progress-line"></div>
+
+                <div class="progress-step">3</div>
+
+            </div>
+
+
+            <div id="stepOne" class="form-step active-step">
+
+                <div class="step-illustration">🫙</div>
+
+                <h2>Name Your Jar</h2>
+
+                <p>
+                    What shall we call your magical little jar?
+                </p>
+
+                <input
+                    type="text"
+                    id="jarName"
+                    placeholder="My Dream Jar"
+                >
+
+                <button class="primary-btn next-btn">
+                    Continue ✨
+                </button>
+
+            </div>
+
+
+
+            <div id="stepTwo" class="form-step">
+
+                <div class="step-illustration">💌</div>
+
+                <h2>Write Your Wish</h2>
+
+                <p>
+                    What is living in your heart today?
+                </p>
+
+                <textarea
+                    id="wishText"
+                    placeholder="Dear Universe..."
+                ></textarea>
+
+                <button class="primary-btn next-btn">
+                    Put Into Jar 🪽
+                </button>
+
+            </div>
+
+
+
+            <div id="stepThree" class="form-step">
+
+                <div class="step-illustration">✨</div>
+
+                <h2>Your Wish is Safe!</h2>
+
+                <p>
+                    Your beautiful wish has been placed
+                    inside your magical jar.
+                </p>
+
+                <button class="primary-btn" id="viewJarBtn">
+                    View My Jar 🫙
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================
+         MY WISHES
+    ========================== -->
+
+    <section class="wishes-section">
+
+        <div class="section-heading">
+
+            <p>💌 Your Collection</p>
+
+            <h2>My Wishes</h2>
+
+        </div>
+
+
+        <div class="wishes-grid" id="wishesGrid">
+
+            <div class="wish-card pink-wish">
+
+                <span class="wish-fold">✦</span>
+
+                <h3>Travel the world</h3>
+
+                <p>And see new beautiful places.</p>
+
+            </div>
+
+
+            <div class="wish-card purple-wish">
+
+                <span class="wish-fold">✧</span>
+
+                <h3>Build my dream</h3>
+
+                <p>Create something meaningful.</p>
+
+            </div>
+
+
+            <div class="wish-card yellow-wish">
+
+                <span class="wish-fold">⭐</span>
+
+                <h3>Be happy</h3>
+
+                <p>And healthy every day.</p>
+
+            </div>
+
+        </div>
+
+
+        <button class="add-wish-btn" id="addWishBtn">
+            ＋ Add a New Wish
+        </button>
+
+    </section>
+
+
+
+    <!-- =========================
+         SHARE SECTION
+    ========================== -->
+
+    <section class="share-section">
+
+        <div class="share-card">
+
+            <div class="share-decoration">🪽</div>
+
+            <h2>Share Your Jar</h2>
+
+            <p>
+                Let someone special leave a little wish for you.
+            </p>
+
+
+            <div class="share-link">
+
+                <input
+                    type="text"
+                    value="littlejar.com/my-wishes"
+                    id="shareLink"
+                    readonly
+                >
+
+                <button id="copyLinkBtn">
+                    Copy Link ✨
+                </button>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="save-card">
+
+            <div class="save-decoration">💌</div>
+
+            <h2>Save Your Jar</h2>
+
+            <p>
+                Save your wishes forever with your email.
+            </p>
+
+
+            <input
+                type="email"
+                placeholder="Your email address"
+                id="emailInput"
+            >
+
+            <button class="primary-btn" id="saveJarBtn">
+                Save My Jar ✨
+            </button>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================
+         MOBILE NAVIGATION
+    ========================== -->
+
+    <div class="mobile-navigation">
+
+        <a href="#home">⌂<span>Home</span></a>
+
+        <a href="#how-it-works">♡<span>Wishes</span></a>
+
+        <button id="mobileAddBtn">＋</button>
+
+        <a href="#my-jar">🪽<span>Share</span></a>
+
+        <a href="#home">♙<span>Profile</span></a>
+
+    </div>
+
+
+
+    <!-- Notification -->
+
+    <div class="notification" id="notification">
+        ✨ Your wish has been saved!
+    </div>
+
+
     <script src="script.js"></script>
+
 </body>
 </html>
