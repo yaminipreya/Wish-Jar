@@ -1,273 +1,428 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>My Little Jar — A tiny place for your wishes, dreams & happy moments</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>StarJar - Soft Little Wishes</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Nunito:wght@600;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-pink: #FFF0F5;
+      --bg-lavender: #E6E6FA;
+      --pastel-pink: #FFB7B2;
+      --pastel-yellow: #FFE5B4;
+      --pastel-purple: #E2F0CB;
+      --pastel-blue: #B5EAD7;
+      --accent-lavender: #C7CEEA;
+      --text-dark: #5A4E69;
+      --white: #FFFFFF;
+      --radius: 20px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Nunito', sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, var(--bg-pink) 0%, var(--bg-lavender) 100%);
+      color: var(--text-dark);
+      min-height: 100vh;
+      padding-bottom: 50px;
+    }
+
+    h1, h2, h3, .logo {
+      font-family: 'Fredoka', sans-serif;
+    }
+
+    /* --- Navigation --- */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 5%;
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(10px);
+      border-bottom: 3px solid #FFF;
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #9B72AA;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 20px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text-dark);
+      font-weight: 700;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: #FF8B94;
+    }
+
+    .btn-primary {
+      background: var(--pastel-pink);
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 50px;
+      font-weight: 800;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(255, 139, 148, 0.3);
+      transition: transform 0.2s;
+    }
+
+    .btn-primary:hover {
+      transform: scale(1.05);
+    }
+
+    /* --- Main Layout --- */
+    .container {
+      max-width: 1200px;
+      margin: 30px auto;
+      padding: 0 20px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+    }
+
+    .card {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 25px;
+      box-shadow: 0 10px 25px rgba(181, 154, 204, 0.15);
+      border: 3px solid #FFF;
+    }
+
+    /* --- Left Column: Hero & Jar --- */
+    .hero-section {
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .hero-title {
+      font-size: 2.2rem;
+      color: #6C5B7B;
+      margin-bottom: 10px;
+    }
+
+    .hero-subtitle {
+      font-size: 1rem;
+      color: #887996;
+      margin-bottom: 20px;
+    }
+
+    .jar-container {
+      position: relative;
+      width: 220px;
+      height: 280px;
+      background: rgba(255, 255, 255, 0.4);
+      border: 6px solid #C7CEEA;
+      border-radius: 30px 30px 60px 60px;
+      display: flex;
+      flex-wrap: wrap-reverse;
+      align-content: flex-start;
+      padding: 15px;
+      gap: 8px;
+      overflow: hidden;
+      margin-bottom: 20px;
+      box-shadow: inset 0 0 15px rgba(255, 255, 255, 0.8), 0 8px 20px rgba(0,0,0,0.05);
+    }
+
+    .jar-lid {
+      width: 140px;
+      height: 25px;
+      background: #FFB7B2;
+      border-radius: 10px;
+      position: absolute;
+      top: -15px;
+      left: 50%;
+      transform: translateX(-50%);
+      border: 4px solid #FFF;
+    }
+
+    .star {
+      width: 30px;
+      height: 30px;
+      clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+      display: inline-block;
+      animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    @keyframes popIn {
+      0% { transform: scale(0); }
+      100% { transform: scale(1); }
+    }
+
+    /* --- Right Column: Fold a Star Creator --- */
+    .section-title {
+      font-size: 1.5rem;
+      margin-bottom: 15px;
+      color: #6C5B7B;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    label {
+      display: block;
+      font-weight: 700;
+      margin-bottom: 5px;
+      font-size: 0.9rem;
+    }
+
+    .color-picker {
+      display: flex;
+      gap: 10px;
+    }
+
+    .color-btn {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: 2px solid white;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+
+    .color-btn.selected {
+      transform: scale(1.2);
+      box-shadow: 0 0 0 2px var(--text-dark);
+    }
+
+    textarea, input[type="date"], input[type="email"] {
+      width: 100%;
+      padding: 12px;
+      border-radius: 12px;
+      border: 2px solid var(--bg-lavender);
+      background: #FAFAFA;
+      font-size: 0.95rem;
+      outline: none;
+    }
+
+    textarea:focus, input:focus {
+      border-color: var(--pastel-pink);
+      background: #FFF;
+    }
+
+    /* --- Feature Cards & Share --- */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 15px;
+      margin-top: 20px;
+    }
+
+    .feature-card {
+      background: #F9F8FC;
+      border-radius: 15px;
+      padding: 15px;
+      text-align: center;
+      border: 2px solid #FFF;
+    }
+
+    .feature-card h4 {
+      font-size: 0.9rem;
+      margin-bottom: 5px;
+    }
+
+    .feature-card p {
+      font-size: 0.75rem;
+      color: #887996;
+    }
+
+    .share-section {
+      margin-top: 25px;
+      text-align: center;
+    }
+
+    .share-icons {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 10px;
+    }
+
+    .icon-btn {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--bg-pink);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      font-weight: bold;
+      color: var(--text-dark);
+      border: 2px solid #FFF;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .container {
+        grid-template-columns: 1fr;
+      }
+      .features-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
 </head>
 <body>
 
-<!-- ===== NAV ===== -->
-<header class="site-header">
-  <div class="wrap header-inner">
-    <a href="#" class="logo">
-      <span class="logo-jar" aria-hidden="true">
-        <svg viewBox="0 0 40 44" width="30" height="33">
-          <path d="M12 8h16v3.5l2 2.5v22a3 3 0 0 1-3 3H13a3 3 0 0 1-3-3V14l2-2.5V8z" fill="#EADCF7" stroke="#8B6BB0" stroke-width="1.6"/>
-          <rect x="14" y="5" width="12" height="4.5" rx="1.5" fill="#C9A96E" stroke="#8B6BB0" stroke-width="1.2"/>
-        </svg>
-      </span>
-      My Little Jar
-    </a>
-    <nav class="main-nav" aria-label="Primary">
-      <a href="#home" class="active">Home</a>
-      <a href="#how-it-works">How it works</a>
-      <a href="#about">About</a>
-      <a href="#faq">FAQ</a>
-    </nav>
-    <button class="btn btn-primary nav-cta" type="button">Create my jar</button>
-    <button class="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false">
-      <span></span><span></span><span></span>
-    </button>
-  </div>
-</header>
+  <nav>
+    <div class="logo">⭐ StarJar</div>
+    <ul class="nav-links">
+      <li><a href="#">Home</a></li>
+      <li><a href="#">My Wish Vault</a></li>
+      <li><a href="#">Community Stars</a></li>
+    </ul>
+    <button class="btn-primary">+ Make a Wish</button>
+  </nav>
 
-<!-- ===== HERO ===== -->
-<section class="hero" id="home">
-  <div class="hero-sky" aria-hidden="true">
-    <span class="hanging-star hs-1"><span class="thread"></span><span class="star-glyph">★</span></span>
-    <span class="hanging-star hs-2"><span class="thread"></span><span class="star-glyph">★</span></span>
-    <span class="hanging-star hs-3"><span class="thread"></span><span class="star-glyph">★</span></span>
-    <span class="hstar hstar-1">★</span>
-    <span class="hstar hstar-3">★</span>
-  </div>
+  <div class="container">
+    
+    <div class="card hero-section">
+      <h1 class="hero-title">Fill Your Days with Soft Little Wishes</h1>
+      <p class="hero-subtitle">Write daily gratitude notes, seal them with a date, and save them in your personal digital glass jar.</p>
+      
+      <div class="jar-container" id="jar">
+        <div class="jar-lid"></div>
+        </div>
 
-  <div class="wrap hero-inner">
-    <div class="hero-copy">
-      <span class="pill">✦ Welcome to</span>
-      <h1>My Little Jar</h1>
-      <p class="hero-lede">A tiny place to write your wishes, tuck away little memories, and watch them gather like stars in a jar you keep forever.</p>
+      <button class="btn-primary" onclick="addRandomStar()">[ Launch Your Jar ]</button>
+    </div>
 
-      <ul class="hero-points">
-        <li><span class="dot dot-pink"></span>Write your wishes</li>
-        <li><span class="dot dot-mint"></span>Save your memories</li>
-        <li><span class="dot dot-gold"></span>Cherish forever</li>
-      </ul>
+    <div class="card">
+      <h2 class="section-title">Fold a Star</h2>
 
-      <div class="hero-actions">
-        <button class="btn btn-primary" type="button">Create my jar</button>
-        <button class="btn btn-ghost" type="button">
-          <svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><polygon points="3,1 13,7 3,13" fill="currentColor"/></svg>
-          How it works
-        </button>
+      <div class="form-group">
+        <label>Paper Color</label>
+        <div class="color-picker">
+          <div class="color-btn selected" style="background: #FFB7B2;" onclick="selectColor(this, '#FFB7B2')"></div>
+          <div class="color-btn" style="background: #FFE5B4;" onclick="selectColor(this, '#FFE5B4')"></div>
+          <div class="color-btn" style="background: #E2F0CB;" onclick="selectColor(this, '#E2F0CB')"></div>
+          <div class="color-btn" style="background: #B5EAD7;" onclick="selectColor(this, '#B5EAD7')"></div>
+          <div class="color-btn" style="background: #C7CEEA;" onclick="selectColor(this, '#C7CEEA')"></div>
+        </div>
       </div>
 
-      <div class="social-proof">
-        <span class="avatars" aria-hidden="true">
-          <span class="avatar" style="--c:#F5B7C6"></span>
-          <span class="avatar" style="--c:#C9A9E0"></span>
-          <span class="avatar" style="--c:#F6D98A"></span>
-          <span class="avatar" style="--c:#9FD8CE"></span>
-        </span>
-        Loved by 10,000+ dreamers
+      <div class="form-group">
+        <label for="wish-date">Lock Date / Event Date</label>
+        <input type="date" id="wish-date">
+      </div>
+
+      <div class="form-group">
+        <label for="wish-text">Your Wish or Positive Note</label>
+        <textarea id="wish-text" rows="3" placeholder="Write your daily wish (e.g., 'Be brave today' or 'Oct 15, 2026 milestone')"></textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="user-email">Save Your Jar (Email)</label>
+        <input type="email" id="user-email" placeholder="example@email.com">
+      </div>
+
+      <button class="btn-primary" style="width: 100%;" onclick="foldAndDropStar()">[ Fold & Drop in Jar 🌟 ]</button>
+
+      <div class="share-section">
+        <label>Share the Magic</label>
+        <div class="share-icons">
+          <a href="#" class="icon-btn">💬</a>
+          <a href="#" class="icon-btn">📸</a>
+          <a href="#" class="icon-btn">✈️</a>
+          <a href="#" class="icon-btn">🔗</a>
+        </div>
       </div>
     </div>
 
-    <div class="hero-jar-wrap">
-      <div class="jar-tag" id="jarTag">Fill it with your little stars<span aria-hidden="true"> ♡</span></div>
-
-      <svg class="hero-jar" viewBox="0 0 360 440" role="img" aria-label="Illustration of a glass jar tied with a ribbon, filled with smiling pastel stars, sitting on a shelf next to a small plant">
-        <defs>
-          <linearGradient id="glass" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stop-color="#F2ECFB" stop-opacity=".9"/>
-            <stop offset="100%" stop-color="#DCEFEC" stop-opacity=".6"/>
-          </linearGradient>
-          <linearGradient id="cork" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stop-color="#DCB483"/>
-            <stop offset="100%" stop-color="#C08F55"/>
-          </linearGradient>
-        </defs>
-
-        <!-- shelf -->
-        <rect x="20" y="404" width="320" height="10" rx="3" fill="#E3B98C"/>
-        <rect x="20" y="414" width="320" height="6" fill="#D2A578"/>
-
-        <!-- potted plant -->
-        <g transform="translate(282,338)">
-          <path d="M0 46 L44 46 L38 76 L6 76 Z" fill="#EADCC8" stroke="#C9A96E" stroke-width="2"/>
-          <path d="M22 46 C 4 30 0 6 10 -8 C 16 4 20 20 22 46 Z" fill="#9FD8CE"/>
-          <path d="M22 46 C 40 32 44 10 36 -6 C 28 4 24 22 22 46 Z" fill="#7EC4B8"/>
-        </g>
-
-        <!-- jar shadow -->
-        <ellipse cx="170" cy="402" rx="98" ry="10" fill="#B79ADB" opacity=".2"/>
-
-        <!-- jar body -->
-        <path d="M86 150 L254 150 L272 178 L272 366 Q272 388 250 388 L90 388 Q68 388 68 366 L68 178 Z" fill="url(#glass)" stroke="#9A7BC4" stroke-width="3"/>
-        <path d="M96 168 L244 168" stroke="#fff" stroke-opacity=".5" stroke-width="6" stroke-linecap="round"/>
-
-        <!-- jar neck + cork -->
-        <path d="M104 128 L236 128 L244 150 L96 150 Z" fill="#EFE7FB" stroke="#9A7BC4" stroke-width="2.5"/>
-        <rect x="100" y="96" width="140" height="34" rx="10" fill="url(#cork)" stroke="#9A7BC4" stroke-width="2.5"/>
-        <path d="M100 108 h140 M100 118 h140" stroke="#A97A45" stroke-width="1.4" opacity=".5"/>
-
-        <!-- ribbon bow -->
-        <path d="M138 100 q32 -30 64 0" fill="none" stroke="#F2879B" stroke-width="6" stroke-linecap="round"/>
-        <path d="M170 100 L150 116 L158 100 L150 84 Z" fill="#F2879B"/>
-        <path d="M170 100 L190 116 L182 100 L190 84 Z" fill="#F2879B"/>
-        <circle cx="170" cy="100" r="7" fill="#E56E85"/>
-
-        <!-- tag string -->
-        <path d="M244 150 q26 6 20 30" fill="none" stroke="#C9A96E" stroke-width="2"/>
-
-        <g class="jar-stars">
-          <use href="#starFace" x="106" y="346" fill="#F6C667" transform="rotate(-8 118 358)"/>
-          <use href="#starFace" x="150" y="360" fill="#F2879B" transform="rotate(6 162 372)"/>
-          <use href="#starFace" x="194" y="346" fill="#C9A9E0" transform="rotate(-10 206 358)"/>
-          <use href="#starFace" x="90"  y="306" fill="#9FD8CE" transform="rotate(8 102 318)"/>
-          <use href="#starFace" x="140" y="312" fill="#F6C667" transform="rotate(-6 152 324)"/>
-          <use href="#starFace" x="188" y="304" fill="#F2879B" transform="rotate(10 200 316)"/>
-          <use href="#starFace" x="228" y="316" fill="#C9A9E0" transform="rotate(-4 240 328)"/>
-          <use href="#starFace" x="112" y="264" fill="#F2879B" transform="rotate(4 124 276)"/>
-          <use href="#starFace" x="160" y="256" fill="#9FD8CE" transform="rotate(-8 172 268)"/>
-          <use href="#starFace" x="204" y="268" fill="#F6C667" transform="rotate(8 216 280)"/>
-          <use href="#starFace" x="80"  y="352" fill="#F6C667" transform="rotate(6 92 364)"/>
-        </g>
-        <defs>
-          <g id="starFace">
-            <path d="M12 0 L15.5 8 L24 8.5 L17 13.7 L19.3 22 L12 17.2 L4.7 22 L7 13.7 L0 8.5 L8.5 8 Z" transform="translate(-12,-8)"/>
-            <circle cx="-4" cy="4" r="1.4" fill="#3B2A4C"/>
-            <circle cx="4" cy="4" r="1.4" fill="#3B2A4C"/>
-            <path d="M-3 8 Q0 10.5 3 8" fill="none" stroke="#3B2A4C" stroke-width="1.2" stroke-linecap="round"/>
-          </g>
-        </defs>
-      </svg>
-
-      <span class="float-star fs1" aria-hidden="true">★</span>
-      <span class="float-star fs2" aria-hidden="true">★</span>
-      <span class="cloud" aria-hidden="true">
-        <svg width="76" height="48" viewBox="0 0 70 44"><ellipse cx="20" cy="26" rx="18" ry="14" fill="#fff"/><ellipse cx="40" cy="18" rx="20" ry="16" fill="#fff"/><ellipse cx="55" cy="28" rx="15" ry="12" fill="#fff"/><circle cx="30" cy="26" r="2" fill="#B79ADB"/><circle cx="42" cy="26" r="2" fill="#B79ADB"/><path d="M30 32 q6 5 12 0" stroke="#B79ADB" stroke-width="1.6" fill="none" stroke-linecap="round"/></svg>
-      </span>
-
-      <aside class="how-card" aria-label="How it works, quick overview">
-        <h2>How it works</h2>
-        <ol>
-          <li>
-            <span class="how-card-icon">1</span>
-            <div><strong>Create your jar</strong><span>Name your very own wish jar</span></div>
-          </li>
-          <li>
-            <span class="how-card-icon">2</span>
-            <div><strong>Add your wishes</strong><span>Write notes & fold them into stars</span></div>
-          </li>
-          <li>
-            <span class="how-card-icon">3</span>
-            <div><strong>Watch it grow</strong><span>Your little stars will fill your jar</span></div>
-          </li>
-          <li>
-            <span class="how-card-icon">4</span>
-            <div><strong>Cherish & share</strong><span>Share your jar with someone special</span></div>
-          </li>
-        </ol>
-      </aside>
-    </div>
   </div>
-</section>
 
-<!-- ===== HOW IT WORKS ===== -->
-<section class="how" id="how-it-works">
-  <div class="wrap how-inner">
-    <div class="how-head">
-      <h2>Four small steps, one little jar</h2>
-      <p>Every jar starts empty. Here's how yours slowly fills up.</p>
-    </div>
-
-    <ol class="how-steps">
-      <li>
-        <span class="step-no">01</span>
-        <div>
-          <h3>Create your jar</h3>
-          <p>Give it a name that feels like yours — your very own wish jar.</p>
+  <div class="container" style="margin-top: 0;">
+    <div class="card" style="grid-column: span 2;">
+      <h3 class="section-title" style="text-align: center;">Jar Features</h3>
+      <div class="features-grid">
+        <div class="feature-card">
+          <h4>Daily Gratitude</h4>
+          <p>Log daily reflections and build a positive habit.</p>
         </div>
-      </li>
-      <li>
-        <span class="step-no">02</span>
-        <div>
-          <h3>Add your wishes</h3>
-          <p>Write little notes and fold them into stars, one at a time.</p>
+        <div class="feature-card">
+          <h4>Future Time Capsule</h4>
+          <p>Seal wishes with future dates & save to your email.</p>
         </div>
-      </li>
-      <li>
-        <span class="step-no">03</span>
-        <div>
-          <h3>Watch it grow</h3>
-          <p>Your jar slowly fills with every star you tuck inside.</p>
+        <div class="feature-card">
+          <h4>Random Memory Pull</h4>
+          <p>Shake your jar to draw a past memory when down.</p>
         </div>
-      </li>
-      <li>
-        <span class="step-no">04</span>
-        <div>
-          <h3>Cherish & share</h3>
-          <p>Keep it just for you, or share your jar with someone special.</p>
-        </div>
-      </li>
-    </ol>
-  </div>
-</section>
-
-<!-- ===== FEATURES / ABOUT ===== -->
-<section class="features" id="about">
-  <div class="wrap features-inner">
-    <div class="feature-card">
-      <span class="feature-icon" style="background:#FBEAF0">⭐</span>
-      <h3>Every wish becomes a star</h3>
-      <p>Type a note to your future self and fold it into a little glowing star for your jar.</p>
-    </div>
-    <div class="feature-card">
-      <span class="feature-icon" style="background:#EAF6F4">🔒</span>
-      <h3>Yours to keep, always</h3>
-      <p>Save your jar with your email and it'll be waiting for you, exactly as you left it.</p>
-    </div>
-    <div class="feature-card">
-      <span class="feature-icon" style="background:#F1EAF9">💌</span>
-      <h3>Share the little wonders</h3>
-      <p>Send your jar's link to someone who deserves a small, happy surprise.</p>
+      </div>
     </div>
   </div>
-</section>
 
-<!-- ===== CTA BAND ===== -->
-<section class="cta-band" id="faq">
-  <div class="wrap cta-inner">
-    <div>
-      <h2>Your jar is waiting to be filled</h2>
-      <p>Start with one wish. See where the rest take you.</p>
-    </div>
-    <button class="btn btn-primary" type="button">Create my jar — it's free</button>
-  </div>
-</section>
+  <script>
+    let selectedColor = '#FFB7B2';
 
-<!-- ===== FOOTER ===== -->
-<footer class="site-footer">
-  <div class="wrap footer-inner">
-    <div class="footer-brand">
-      <span class="logo-jar" aria-hidden="true">
-        <svg viewBox="0 0 40 44" width="24" height="26">
-          <path d="M12 8h16v3.5l2 2.5v22a3 3 0 0 1-3 3H13a3 3 0 0 1-3-3V14l2-2.5V8z" fill="#EADCF7" stroke="#8B6BB0" stroke-width="1.6"/>
-          <rect x="14" y="5" width="12" height="4.5" rx="1.5" fill="#C9A96E" stroke="#8B6BB0" stroke-width="1.2"/>
-        </svg>
-      </span>
-      My Little Jar
-    </div>
-    <p>A little jar for your little wonders ♡</p>
-    <p class="footer-copy">© <span id="year"></span> My Little Jar. Made with tiny stars.</p>
-  </div>
-</footer>
+    // Color Selector function
+    function selectColor(element, color) {
+      document.querySelectorAll('.color-btn').forEach(btn => btn.classList.remove('selected'));
+      element.classList.add('selected');
+      selectedColor = color;
+    }
 
-<script src="script.js"></script>
+    // Add star to jar functionality
+    function foldAndDropStar() {
+      const wishText = document.getElementById('wish-text').value;
+      const email = document.getElementById('user-email').value;
+
+      if (!wishText) {
+        alert("Please write a small wish before folding your star! ✨");
+        return;
+      }
+
+      const jar = document.getElementById('jar');
+      const star = document.createElement('div');
+      star.classList.add('star');
+      star.style.backgroundColor = selectedColor;
+      
+      jar.appendChild(star);
+
+      // Reset form
+      document.getElementById('wish-text').value = '';
+      
+      if (email) {
+        alert("Your star was folded and safely saved to " + email + "! 🌟");
+      } else {
+        alert("Your star was dropped into the jar! 🌟");
+      }
+    }
+
+    // Helper for demo button
+    function addRandomStar() {
+      const colors = ['#FFB7B2', '#FFE5B4', '#E2F0CB', '#B5EAD7', '#C7CEEA'];
+      const randomColor = colors[Math.floor(Math.random() * colors.length)];
+      
+      const jar = document.getElementById('jar');
+      const star = document.createElement('div');
+      star.classList.add('star');
+      star.style.backgroundColor = randomColor;
+      
+      jar.appendChild(star);
+    }
+  </script>
 </body>
 </html>
